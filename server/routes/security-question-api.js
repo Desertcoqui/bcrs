@@ -15,6 +15,75 @@ const BaseResponse = require('../services/base-response');
 //configurations
 const router = express.Router();
 
+
+/**
+ * findAll
+ * @openapi
+ * /api/security-questions:
+ * get: 
+ *      summary: find all questions 
+ *      description: returns a list of all questions
+ *      responses: 
+ *           '200':    # status code
+ *           description: List of all tasks
+ *           content:
+ *               application/json:
+ *               schema:
+ *                   type: array
+ *                   items:
+ *                   type: string
+ *           '500':    # status code
+ *           description: Server exceptions
+ *           content:
+ *               application/json:
+ *               schema:
+ *                   type: array
+ *                   items:
+ *                   type: string
+ *           '501':    # status code
+ *           description: MongoDB exceptions
+ *           content:
+ *               application/json:
+ *               schema:
+ *                   type: array
+ *                   items:
+ *                   type: string
+ */
+
+//findAll
+router.get('/', async(req,res) => {
+    try 
+    {
+        SecurityQuestion.find({})
+            .where('isDisabled')
+            .equals(false)
+            .exec(function(err,securityQuestions)
+        {
+            if (err)
+            {
+                console.log(err);
+                const findAllMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+                res.status(500).send(findAllMongodbErrorResponse.toObject());
+            }
+            else
+            {
+                console.log(securityQuestions);
+                const findAllResponse = new BaseResponse(200, 'Query successful', securityQuestions);
+                res.json(findAllResponse.toObject());
+            }
+        })
+    } 
+    catch (e) 
+    {
+        console.log(e);
+        const findAllCatchErrorResponse = new ErrorResponse(500,'Internal server error', e.message);
+        res.status(500).send(findAllCatchErrorResponse.toObject());
+    }
+});
+
+
+
+
 /**
  * openapi: 3.0.0
  * @openapi
