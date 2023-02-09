@@ -8,6 +8,13 @@ const mongoose = require('mongoose');
 const app = express(); // Express variable.
 
 /**
+ * Routes
+ */
+const UserApi = require('./routes/user-api');
+const SessionApi = require('./routes/session-api');
+const SecurityQuestionApi = require('./routes/security-question-api')
+
+/**
  * App configurations.
  */
 app.use(express.json());
@@ -29,6 +36,13 @@ mongoose.connect(CONN).then(() => {
 }).catch(err => {
   console.log('MongoDB Error: ' + err.message);
 });
+
+/**
+ * APIs
+ */
+//app.use('/api/users', UserApi);
+//app.use('api/session', SessionApi);
+app.set('/api/security-questions', SecurityQuestionApi)
 
 // Wire-up the Express server.
 app.listen(PORT, () => {
