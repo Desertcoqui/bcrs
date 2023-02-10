@@ -1,68 +1,79 @@
+// Title: Bobs Computer Repair Shop
+// Author: Professor Krasso
+// Date: Jan 11 2023
+// Modified By: Ferdinand Detres Jr, Manel Phisme, Kailee Stephens
+// Attributions: https://www.section.io/engineering-education/nodejs-mongoosejs-mongodb/
+//https://www.youtube.com/watch?v=WDrU305J1yw
+// In-Class tutorials
+
 /**
  * Require statements
  */
-const express = require('express');
-const path = require('path');
-const mongoose = require('mongoose');
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
+const express = require("express");
+const path = require("path");
+const mongoose = require("mongoose");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
 
 const app = express(); // Express variable.
 
 /**
  * Routes
  */
-const UserApi = require('./routes/user-api');
-const SessionApi = require('./routes/session-api');
-const SecurityQuestionApi = require('./routes/security-question-api')
+const UserApi = require("./routes/user-api");
+const SessionApi = require("./routes/session-api");
+const SecurityQuestionApi = require("./routes/security-question-api");
 
 /**
  * App configurations.
  */
 app.use(express.json());
-app.use(express.urlencoded({'extended': true}));
-app.use(express.static(path.join(__dirname, '../dist/bcrs')));
-app.use('/', express.static(path.join(__dirname, '../dist/bcrs')));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "../dist/bcrs")));
+app.use("/", express.static(path.join(__dirname, "../dist/bcrs")));
 
 // default server port value.
 const PORT = process.env.PORT || 3000;
 
-// TODO: This line will be replaced with your database connection string (including username/password).
-const CONN = 'mongodb+srv://superadmin:s3cret@cluster0-lujih.mongodb.net/bcrs?retryWrites=true&w=majority';
+// created database on Feb 10 8:24AM Central Time
+const CONN = "mongodb+srv://admin:s3cret@bcrsdb.hdw2zdb.mongodb.net/?retryWrites=true&w=majority";
 
 /**
  * Database connection.
  */
-mongoose.connect(CONN).then(() => {
-  console.log('Connection to the database was successful');
-}).catch(err => {
-  console.log('MongoDB Error: ' + err.message);
-});
+mongoose
+  .connect(CONN)
+  .then(() => {
+    console.log("Connection to the database was successful");
+  })
+  .catch((err) => {
+    console.log("MongoDB Error: " + err.message);
+  });
 
 const options = {
-  definition:{
-    openapi: '3.0.0',
+  definition: {
+    openapi: "3.0.0",
     explorer: true,
     info: {
-      title: 'WEB 450 RESTful APIs',
-      version: '1.0.0'
+      title: "WEB 450 RESTful APIs",
+      version: "1.0.0",
     },
   },
-  apis: ['./routes/*.js'], //files containing annotations for the OpenApi Specification
-}
+  apis: ["./routes/*.js"], //files containing annotations for the OpenApi Specification
+};
 
 const openapiSpecification = swaggerJsdoc(options);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
 /**
  * APIs
  */
-app.use('/api/users', UserApi);
+app.use("/api/users", UserApi);
 //app.use('api/session', SessionApi);
-app.use('/api/security-questions', SecurityQuestionApi)
+app.use("/api/security-questions", SecurityQuestionApi);
 
 // Wire-up the Express server.
 app.listen(PORT, () => {
-  console.log('Application started and listening on PORT: ' + PORT);
-})
+  console.log("Application started and listening on PORT: " + PORT);
+});
