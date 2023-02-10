@@ -117,6 +117,49 @@ router.get("/", async (req, res) => {
   }
 });
 /**
+ * findById
+ * @openapi
+ * /api/user/{id}
+ *  post:
+ *      tags:
+ *          - user
+ *      description: API to find a list of all users
+ *      summary: find all users
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: the id of the employee to update
+ *            required: yes
+ *            schema:
+ *              type: number
+ *      response:
+ *          '200':
+ *              description: The updated document
+ *          '500':
+ *              description: Server Exception
+ *          '501':
+ *              description: MongoDB Exception
+ */
+router.get(':/id', async(req, res) => {
+  try {
+    User.findOne({'_id': req.params.id}, function(err, user) {
+      if (err) {
+        console.log(err);
+        const findByIdMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
+        res.status(500).send(findByIdMongodbErrorResponse.toObject());
+      } else {
+        console.log(users);
+        const findByIdResponse = new BaseResponse(200, "Query successful", users);
+        res.json(findByIdResponse.toObjet());        
+      }
+    })
+  } catch(e) {
+    console.log(e);
+    const findByIdCatchErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
+    res.status(500).send(findByIdCatchErrorResponse.toObject());    
+  }
+})
+/**
  * updateUser
  * @openapi
  * /api/user/{id}
@@ -174,6 +217,45 @@ router.post("/:id", async (req, res) => {
     console.log(e);
     const updateUserCatchErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
     res.status(500).send(updateUserCatchErrorResponse.toObject());
+  }
+});
+/**
+ * deleteUser
+ * @openapi
+ * /api/user/{id}
+*/
+router.delete('/:id', async (req, res) => {
+  try {
+    User.findOne({'_id': req.params.id}, function(err, user) {
+      if (err) {
+        console.log(err);
+        const deleteUserMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+        res.status(500).send(deleteUserMongodbErrorResponse.toObject());
+      } else {
+        console.log(user);
+
+        user.set({
+          isDisabled: true,
+          dateModified: new Date()
+        });
+
+        user.save(function(err, savedUser) {
+          if (err) {
+            console.log(err);
+            const savedSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, 'Internal server error');
+            res.json(savedSecurityQuestionMongodbErrorResponse.toObject());
+          } else {
+            console.log(savedUser);
+            const savedUserResponse = new BaseResponse(200, 'Query successful', savedUser);
+            res.json(savedUserResponse.toObject());
+          }
+        })
+      }
+    })
+  } catch(e) {
+    console.log(e);
+    const deleteUserCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+    res.status(500).send(deleteUserCatchErrorResponse.toObject());
   }
 });
 module.exports = router;

@@ -56,37 +56,28 @@ router.get("/:id", async (req, res) => {
   }
 });
 /**
- *findAll
+ * findAll
  * @openapi
- * /api/security-questions:
- *   get:
- *      summary: find all questions
- *      description: returns a list of all questions
- *      responses:
- *           '200':    # status code
- *           description: List of all tasks
- *           content:
- *               application/json:
- *               schema:
- *                   type: array
- *                   items:
- *                   type: string
- *           '500':    # status code
- *           description: Server exceptions
- *           content:
- *               application/json:
- *               schema:
- *                   type: array
- *                   items:
- *                   type: string
- *           '501':    # status code
- *           description: MongoDB exceptions
- *           content:
- *               application/json:
- *               schema:
- *                   type: array
- *                   items:
- *                   type: string
+ * /api/security-questions/{id}:
+ *  get:
+ *    tags:
+ *      - Security Questions
+ *    description: returns a list of all questions
+ *    summary: find all security questions
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The security question's id
+ *         schema:
+ *           type: string
+ *    responses:
+ *      "200":
+ *        description: Query successful
+ *      "500":
+ *        description: Internal server error
+ *      "501":
+ *        description: MongoDB Exception
  */
 router.get("/", async (req, res) => {
   try {
@@ -160,6 +151,73 @@ router.post("/", async (req, res) => {
     const createSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
     res.status(500).send(createSecurityQuestionMongodbErrorResponse.toObject());
   }
+});
+/**
+ * updateSecurityQuestion
+ * @openapi
+ * /api/security-questions/{id}:
+ *  get:
+ *    tags:
+ *      - Security Questions
+ *    description: API to update security question objects
+ *    summary: Updates a new security question object
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        description: The security question id requested by user
+ *        schema:
+ *          type: string
+ *    responses:
+ *      "200":
+ *        description: Query successful
+ *      "500":
+ *        description: Internal server error
+ *      "501":
+ *        description: MongoDB Exception
+ */
+router.put('/:id', async(req,res) => {
+    try 
+    {
+        SecurityQuestion.findOne({'_id': req.params.id}, function(err, securityQuestion) {
+            if (err)
+            {
+                console.log(err);
+                const updateSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+                res.status(500).send(updateSecurityQuestionMongodbErrorResponse.toObject())
+            }
+            else
+            {
+                console.log(securityQuestion);
+
+                securityQuestion.set({
+                    text: req.body.text
+                });
+
+                securityQuestion.save(function( err, savedSecurityQuestion) {
+                    if (err)
+                    {
+                        console.log(err);
+                        const savedSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+                        res.status(500).send(savedSecurityQuestionMongodbErrorResponse.toObject());
+                    }
+                    else
+                    {
+                        console.log(savedSecurityQuestion);
+                        const updateSecurityQuestionResponse = new BaseResponse(200, 'Query Successful', savedSecurityQuestion);
+                        res.json(updateSecurityQuestionResponse.toObject());
+                    }
+                })
+            }
+        })
+    }
+    catch (e)
+    {
+        console.log(e);
+        const updateSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+        res.status(500).send(updateSecurityQuestionMongodbErrorResponse.toObject());
+
+    }
 });
 /**
  * deleteSecurityQuestions
