@@ -223,7 +223,26 @@ router.post("/:id", async (req, res) => {
  * deleteUser
  * @openapi
  * /api/user/{id}
-*/
+ *  post:
+ *      tags:
+ *          - user
+ *      description: API to delete a user
+ *      summary: Delete a user 
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: the id of the employee to update
+ *            required: yes
+ *            schema:
+ *              type: number
+ *      response:
+ *          '200':
+ *              description: The updated document
+ *          '500':
+ *              description: Server Exception
+ *          '501':
+ *              description: MongoDB Exception
+ */
 router.delete('/:id', async (req, res) => {
   try {
     User.findOne({'_id': req.params.id}, function(err, user) {
