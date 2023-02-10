@@ -161,5 +161,62 @@ router.post("/", async (req, res) => {
     res.status(500).send(createSecurityQuestionMongodbErrorResponse.toObject());
   }
 });
+/**
+ * deleteSecurityQuestions
+ * @openapi
+ * /api/security-questions/{id}:
+ *   delete:
+ *     tags:
+ *       - Security Questions
+ *     description: API to delete security question objects
+ *     summary: Deletes a new security question object
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The security question's id
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '500':
+ *         description: Internal server error
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.delete("/:id", async (req, res) => {
+  try {
+    SecurityQuestion.findOne({ _id: req.params.id }, function (err, securityQuestion) {
+      if (err) {
+        console.log(err);
+        const deleteSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
+        res.status(500).send(deleteSecurityQuestionMongodbErrorResponse.toObject());
+      } else {
+        console.log(securityQuestion);
+
+        securityQuestion.set({
+          isDisabled: true,
+        });
+
+        securityQuestion.save(function (err, savedSecurityQuestion) {
+          if (err) {
+            console.log(err);
+            const savedSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
+            res.status(500).send(savedSecurityQuestionMongodbErrorResponse.toObject());
+          } else {
+            console.log(savedSecurityQuestion);
+            const deleteSecurityQuestionResponse = new BaseResponse(200, "Query successful", savedSecurityQuestion);
+            res.json(deleteSecurityQuestionResponse.toObject());
+          }
+        });
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    const deleteSecurityQuestionCatchErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
+    res.status(500).send(deleteSecurityQuestionCatchErrorResponse.toObject());
+  }
+});
 
 module.exports = router;
