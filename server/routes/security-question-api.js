@@ -17,6 +17,7 @@ const router = express.Router();
 
 
 /**
+ * openapi: 3.0.0
  * findAll
  * @openapi
  * /api/security-questions:

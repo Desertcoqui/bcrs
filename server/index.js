@@ -4,6 +4,8 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
 
 const app = express(); // Express variable.
 
@@ -37,12 +39,28 @@ mongoose.connect(CONN).then(() => {
   console.log('MongoDB Error: ' + err.message);
 });
 
+const options = {
+  definition:{
+    openapi: '3.0.0',
+    explorer: true,
+    info: {
+      title: 'WEB 450 RESTful APIs',
+      version: '1.0.0'
+    },
+  },
+  apis: ['./routes/*.js'], //files containing annotations for the OpenApi Specification
+}
+
+const openapiSpecification = swaggerJsdoc(options);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+
 /**
  * APIs
  */
-//app.use('/api/users', UserApi);
+app.use('/api/users', UserApi);
 //app.use('api/session', SessionApi);
-app.set('/api/security-questions', SecurityQuestionApi)
+app.use('/api/security-questions', SecurityQuestionApi)
 
 // Wire-up the Express server.
 app.listen(PORT, () => {

@@ -17,7 +17,7 @@ const saltRounds = 10; // default salt rounds for hashing algorithm
 
 
 /**
- * FindAll
+ * openapi: 3.0.0
  * @openapi
  * /api/users:
  *  get:
