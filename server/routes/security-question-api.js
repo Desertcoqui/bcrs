@@ -51,6 +51,8 @@ const router = express.Router();
  */
 
 //findAll
+
+
 router.get('/', async(req,res) => {
     try 
     {
@@ -80,9 +82,6 @@ router.get('/', async(req,res) => {
         res.status(500).send(findAllCatchErrorResponse.toObject());
     }
 });
-
-
-
 
 /**
  * openapi: 3.0.0
@@ -118,7 +117,6 @@ router.get('/', async(req,res) => {
  */
 
 
-
 router.post('/', async(req, res)=>{
    try 
    {
@@ -150,3 +148,4 @@ router.post('/', async(req, res)=>{
    }
 })
 
+module.exports = router;

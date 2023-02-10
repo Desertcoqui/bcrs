@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const UserRoleSchema = require('../schemas/user-role');
+const UserRoleSchema = require('../schemas/user-roles');
 const SelectedSecurityQuestionSchema = require('../schemas/selected-security-question');
 
 let userSchema = new Schema({
