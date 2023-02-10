@@ -6,12 +6,8 @@
 //https://www.youtube.com/watch?v=WDrU305J1yw
 // In-Class tutorials
 
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
-let selectedSecurityQuestionSchema = new Schema({
-  questionText: { type: String },
-  answerText: { type: String },
-});
-
-module.exports = selectedSecurityQuestionSchema;
+//interface for security question
+export interface SecurityQuestion {
+  _id?: string;
+  text: string;
+}
