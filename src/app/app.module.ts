@@ -11,13 +11,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { SecurityQuestionDetailsComponent } from './pages/security-question-details/security-question-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AuthLayoutComponent,
-    BaseLayoutComponent
+    BaseLayoutComponent,
+    SecurityQuestionDetailsComponent
   ],
   imports: [
     BrowserModule,
