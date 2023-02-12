@@ -27,7 +27,7 @@ export class SecurityQuestionService {
     })
   }
 
-  updateSecurityQuestion(questionId:String, updatedSecurityQuestion: SecurityQuestion): Observable<any> {
+  updateSecurityQuestion(questionId:string, updatedSecurityQuestion: SecurityQuestion): Observable<any> {
     return this.http.put('/api/security-questions/' + questionId, {
       text: updatedSecurityQuestion.text
     })
