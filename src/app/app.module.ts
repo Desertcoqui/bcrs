@@ -14,7 +14,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { HomeComponent } from "./pages/home/home.component";
 import { SecurityQuestionDetailsComponent } from "./pages/security-question-details/security-question-details.component";
 import { SecurityQuestionListComponent } from "./pages/security-question-list/security-question-list.component";
-import { LoginComponent } from "./pages/signin/signin.component";
+import { LoginComponent } from "./pages/signin/Login.component";
 import { UserCreateComponent } from "./pages/user-create/user-create.component";
 import { UserDetailsComponent } from "./pages/user-details/user-details.component";
 import { UserListComponent } from "./pages/user-list/user-list.component";
@@ -22,7 +22,6 @@ import { UserListComponent } from "./pages/user-list/user-list.component";
 // Shared
 import { AuthLayoutComponent } from "./shared/auth-layout/auth-layout.component";
 import { BaseLayoutComponent } from "./shared/base-layout/base-layout.component";
-import { DeleteRecordDialogComponent } from "./shared/delete-record-dialog/delete-record-dialog.component";
 
 // Services
 import { CookieService } from "ngx-cookie-service";
@@ -65,7 +64,6 @@ import { TableModule } from "primeng/table";
     AppComponent,
     AuthLayoutComponent,
     BaseLayoutComponent,
-    DeleteRecordDialogComponent,
     HomeComponent,
     SecurityQuestionDetailsComponent,
     SecurityQuestionListComponent,
