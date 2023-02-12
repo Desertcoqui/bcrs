@@ -8,13 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
     
-    cosntructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
     findAllUsers(): Observable<any> {
         return this.http.get('/api/users');
     }
 
-    findUserById(userId: string): Obeservable<any> {
+    findUserById(userId: string): Observable<any> {
         return this.http.get('/api/users/' + userId);
     }
     

@@ -12,6 +12,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SecurityQuestionDetailsComponent } from './pages/security-question-details/security-question-details.component';
+import { UserCreateComponent } from './pages/user-create/user-create.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { SecurityQuestionDetailsComponent } from './pages/security-question-deta
     HomeComponent,
     AuthLayoutComponent,
     BaseLayoutComponent,
-    SecurityQuestionDetailsComponent
+    SecurityQuestionDetailsComponent,
+    UserCreateComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
