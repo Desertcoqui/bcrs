@@ -29,19 +29,6 @@ const PORT = process.env.PORT || 3000;
 
 // created database on Feb 10 8:24AM Central Time
 const CONN = "mongodb+srv://admin:s3cret@bcrsdb.hdw2zdb.mongodb.net/?retryWrites=true&w=majority";
-
-/**
- * Database connection.
- */
-mongoose
-  .connect(CONN)
-  .then(() => {
-    console.log("Connection to the database was successful");
-  })
-  .catch((err) => {
-    console.log("MongoDB Error: " + err.message);
-  });
-
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -68,6 +55,18 @@ app.set("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.set("/api/users", UserApi);
 app.set("/api/session", SessionApi);
 app.set("/api/security-questions", SecurityQuestionApi);
+
+/**
+ * Database connection.
+ */
+mongoose
+  .connect(CONN)
+  .then(() => {
+    console.log("Connection to the database was successful");
+  })
+  .catch((err) => {
+    console.log("MongoDB Error: " + err.message);
+  });
 
 // Wire-up the Express server.
 app.listen(PORT, () => {
