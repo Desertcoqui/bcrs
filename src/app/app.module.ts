@@ -55,19 +55,6 @@ import { MessagesModule } from "primeng/messages";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    AuthLayoutComponent,
-    BaseLayoutComponent,
-    LoginComponent,
-    UserCreateComponent,
-    UserDetailsComponent,
-    UserListComponent,
-    DeleteRecordDialogComponent,
-    SecurityQuestionDetailsComponent,
-    SecurityQuestionListComponent,
-  ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -100,6 +87,19 @@ import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
     MessagesModule,
     ReactiveFormsModule,
     TableModule,
+  ],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    AuthLayoutComponent,
+    BaseLayoutComponent,
+    LoginComponent,
+    UserCreateComponent,
+    UserDetailsComponent,
+    UserListComponent,
+    DeleteRecordDialogComponent,
+    SecurityQuestionDetailsComponent,
+    SecurityQuestionListComponent,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],
