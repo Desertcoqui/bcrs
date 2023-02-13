@@ -64,13 +64,12 @@ const options = {
 
 const openapiSpecification = swaggerJsdoc(options);
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
-
 /**
  * APIs
  */
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.use("/api/users", UserApi);
-//app.use('api/session', SessionApi);
+app.use("api/session", SessionApi);
 app.use("/api/security-questions", SecurityQuestionApi);
 
 // Wire-up the Express server.
