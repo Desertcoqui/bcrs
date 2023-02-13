@@ -55,6 +55,7 @@ import { MessagesModule } from "primeng/messages";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 
 @NgModule({
+  
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -97,7 +98,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
     UserCreateComponent,
     UserDetailsComponent,
     UserListComponent,
-    DeleteRecordDialogComponent,
     SecurityQuestionDetailsComponent,
     SecurityQuestionListComponent,
   ],

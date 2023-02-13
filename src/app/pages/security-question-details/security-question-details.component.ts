@@ -17,6 +17,7 @@ import { Message } from "primeng/api";
   styleUrls: ["./security-question-details.component.css"],
 })
 export class SecurityQuestionDetailsComponent implements OnInit {
+
   question: SecurityQuestion;
   questionId: string;
   errorMessages: Message[];
@@ -25,13 +26,8 @@ export class SecurityQuestionDetailsComponent implements OnInit {
     text: [null, Validators.compose([Validators.required])],
   });
 
-  constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private router: Router,
-    private securityQuestionService: SecurityQuestionService
-  ) {
-    this.question = {} as SecurityQuestionService;
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router: Router, private securityQuestionService: SecurityQuestionService) {
+    this.question = {} as SecurityQuestion;
     this.errorMessages = [];
     this.questionId = this.route.snapshot.paramMap.get("questionId") ?? "";
 
@@ -43,7 +39,7 @@ export class SecurityQuestionDetailsComponent implements OnInit {
         console.log(e);
       },
       complete: () => {
-        this.editFormControls["text"].setValue(this.question.text);
+        this.editForm.controls["text"].setValue(this.question.text);
       },
     });
   }

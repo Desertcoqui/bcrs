@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../shared/models/user.interface";
 import { UserService } from "../../shared/services/user.service";
 import { Message } from "primeng/api";
