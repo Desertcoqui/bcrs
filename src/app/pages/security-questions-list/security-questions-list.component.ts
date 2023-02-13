@@ -18,7 +18,7 @@ import { ConfirmationService, ConfirmEventType } from "primeng/api";
   styleUrls: ["./security-questions-list.component.css"],
   providers: [ConfirmationService],
 })
-export class SecurityQuestionsListComponent implements OnInit {
+export class SecurityQuestionListComponent implements OnInit {
   securityQuestions: SecurityQuestion[];
   sqForm: FormGroup = this.fb.group({
     text: [null, Validators.compose([Validators.required])],
