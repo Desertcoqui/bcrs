@@ -7,8 +7,8 @@
 // In-Class tutorials
 
 import { Component, OnInit } from "@angular/core";
-import { SecurityQuestionService } from "./../../shared/services/security-question.service";
-import { SecurityQuestion } from "./../../shared/models/security-question.interface";
+import { SecurityQuestionService } from "../../shared/services/security-question.service";
+import { SecurityQuestion } from "../../shared/models/security-question.interface";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ConfirmationService, ConfirmEventType } from "primeng/api";
 
