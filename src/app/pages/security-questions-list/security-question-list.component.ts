@@ -7,15 +7,15 @@
 // In-Class tutorials
 
 import { Component, OnInit } from "@angular/core";
-import { SecurityQuestionService } from "./../../shared/services/security-question.service";
-import { SecurityQuestion } from "./../../shared/models/security-question.interface";
+import { SecurityQuestionService } from "../../shared/services/security-question.service";
+import { SecurityQuestion } from "../../shared/models/security-question.interface";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ConfirmationService, ConfirmEventType } from "primeng/api";
 
 @Component({
-  selector: "app-security-questions-list",
-  templateUrl: "./security-questions-list.component.html",
-  styleUrls: ["./security-questions-list.component.css"],
+  selector: "app-security-question-list",
+  templateUrl: "./security-question-list.component.html",
+  styleUrls: ["./security-question-list.component.css"],
   providers: [ConfirmationService],
 })
 export class SecurityQuestionListComponent implements OnInit {
