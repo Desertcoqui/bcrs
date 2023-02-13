@@ -45,9 +45,13 @@ import { CookieService } from "ngx-cookie-service";
 import { DialogModule } from "@angular/cdk/dialog";
 // PrimeNG
 import { ButtonModule } from "primeng/button";
-import { ConfirmationService, ConfirmEventType } from "primeng/api";
+import { ConfirmationService } from "primeng/api";
+import { ConfirmEventType } from "primeng/api";
+
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { TableModule } from "primeng/table";
+import { MessageModule } from "primeng/message";
+import { MessagesModule } from "primeng/messages";
 
 @NgModule({
   declarations: [
