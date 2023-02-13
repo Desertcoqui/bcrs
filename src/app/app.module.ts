@@ -71,8 +71,6 @@ import { MessagesModule } from "primeng/messages";
     BrowserModule,
     ButtonModule,
     ConfirmDialogModule,
-
-    HttpClient,
     DialogModule,
     FlexLayoutModule,
     FormsModule,
