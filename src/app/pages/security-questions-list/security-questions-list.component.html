@@ -1,0 +1,69 @@
+<!-- // Title: Bobs Computer Repair Shop
+// Author: Professor Krasso
+// Date: Feb 10 2023
+// Modified By: Ferdinand Detres Jr
+// Attributions: https://www.section.io/engineering-education/nodejs-mongoosejs-mongodb/
+//https://www.youtube.com/watch?v=WDrU305J1yw
+// In-Class tutorials -->
+
+<p-confirmDialog [style]="{width: '35vw'}" [baseZIndex]='1000' rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<div fxFlex="column" fxLayoutGap="20px">
+    <div fxFlex>
+        <h1 class="title">
+            Security Questions Config Page. <br>
+            <span class="subtitle">Filed marked with an asterisk are required</span>
+        </h1>
+    </div>
+
+    <div fxFlex>
+        <div fxLayout="column">
+            <mat-card>
+                <form [formGroup]="sqForm" (ngSubmit)="create(); sqForm.reset();">
+                    <mat-form-filed appearance="fill" class="w-100">
+                        <mat-label>Security Questions </mat-label>
+                        <input type="text" matInput formControlName="text" required
+                            placeholder="Enter a security question..." />
+                        <button type="submit" [disabled]="!sqForm.valid" mat-icon-button matSuffix>
+                            <mat-icon color="primary" style="width: 36px; height: 36px; font-size:36px"
+                                matSuffix>add_circle</mat-icon>
+                        </button>
+                    </mat-form-filed>
+                    <mat-error
+                        *NgIf="sqForm.controls['text'].hasError('required')&& sqForm.controls['text'].touched">Security
+                        question is a required field
+                    </mat-error>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+
+    <div fxFlex>
+        <p-table [value]="securityQuestions" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        Text
+                    </th>
+                    <th style="width:8rem;">
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-sq>
+                <tr>
+                    <td>{{sq.text}}</td>
+                    <td style="text-align:center">
+                        <button pButton pRipple type="button" routerLink="/security-questions/{{sq._id}}"
+                            icon="pi pi-pencil" class="p-button-rounded p-button-text"></button>
+                        <button pButton pRipple type="button" (click)="delete(sq._id)" icon="pi pi-trash"
+                            class="p-button-rounded p-button-text"></button>
+
+                    </td>
+                </tr>
+
+            </ng-template>
+        </p-table>
+
+    </div>
+
+</div>

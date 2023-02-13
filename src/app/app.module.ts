@@ -1,6 +1,14 @@
+// Title: Bobs Computer Repair Shop
+// Author: Professor Krasso
+// Date: Feb 10 2023
+// Modified By: Ferdinand Detres Jr
+// Attributions: https://www.section.io/engineering-education/nodejs-mongoosejs-mongodb/
+//https://www.youtube.com/watch?v=WDrU305J1yw
+// In-Class tutorials
+
+//imports
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -9,7 +17,6 @@ import { AuthLayoutComponent } from "./shared/auth-layout/auth-layout.component"
 import { BaseLayoutComponent } from "./shared/base-layout/base-layout.component";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
