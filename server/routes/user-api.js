@@ -80,7 +80,6 @@ router.post("/", async (req, res) => {
     res.status(500).send(createUserCatchErrorResponse.toObject());
   }
 });
-
 /**
  * findAll
  * @openapi
@@ -140,9 +139,9 @@ router.get("/", async (req, res) => {
  *          '501':
  *              description: MongoDB Exception
  */
-router.get(':/id', async(req, res) => {
+router.get(":/id", async (req, res) => {
   try {
-    User.findOne({'_id': req.params.id}, function(err, user) {
+    User.findOne({ _id: req.params.id }, function (err, user) {
       if (err) {
         console.log(err);
         const findByIdMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
@@ -150,15 +149,15 @@ router.get(':/id', async(req, res) => {
       } else {
         console.log(users);
         const findByIdResponse = new BaseResponse(200, "Query successful", users);
-        res.json(findByIdResponse.toObjet());        
+        res.json(findByIdResponse.toObjet());
       }
-    })
-  } catch(e) {
+    });
+  } catch (e) {
     console.log(e);
     const findByIdCatchErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
-    res.status(500).send(findByIdCatchErrorResponse.toObject());    
+    res.status(500).send(findByIdCatchErrorResponse.toObject());
   }
-})
+});
 /**
  * updateUser
  * @openapi
@@ -227,7 +226,7 @@ router.post("/:id", async (req, res) => {
  *      tags:
  *          - user
  *      description: API to delete a user
- *      summary: Delete a user 
+ *      summary: Delete a user
  *      parameters:
  *          - in: path
  *            name: id
@@ -243,37 +242,37 @@ router.post("/:id", async (req, res) => {
  *          '501':
  *              description: MongoDB Exception
  */
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-    User.findOne({'_id': req.params.id}, function(err, user) {
+    User.findOne({ _id: req.params.id }, function (err, user) {
       if (err) {
         console.log(err);
-        const deleteUserMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
+        const deleteUserMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
         res.status(500).send(deleteUserMongodbErrorResponse.toObject());
       } else {
         console.log(user);
 
         user.set({
           isDisabled: true,
-          dateModified: new Date()
+          dateModified: new Date(),
         });
 
-        user.save(function(err, savedUser) {
+        user.save(function (err, savedUser) {
           if (err) {
             console.log(err);
-            const savedSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, 'Internal server error');
+            const savedSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, "Internal server error");
             res.json(savedSecurityQuestionMongodbErrorResponse.toObject());
           } else {
             console.log(savedUser);
-            const savedUserResponse = new BaseResponse(200, 'Query successful', savedUser);
+            const savedUserResponse = new BaseResponse(200, "Query successful", savedUser);
             res.json(savedUserResponse.toObject());
           }
-        })
+        });
       }
-    })
-  } catch(e) {
+    });
+  } catch (e) {
     console.log(e);
-    const deleteUserCatchErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+    const deleteUserCatchErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
     res.status(500).send(deleteUserCatchErrorResponse.toObject());
   }
 });

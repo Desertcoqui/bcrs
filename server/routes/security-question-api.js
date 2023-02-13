@@ -58,46 +58,43 @@ router.get("/:id", async (req, res) => {
 /**
  * findAll
  * @openapi
- * /api/security-questions/{id}:
- *  get:
- *    tags:
- *      - Security Questions
- *    description: returns a list of all questions
- *    summary: find all security questions
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: The security question's id
- *         schema:
- *           type: string
- *    responses:
- *      "200":
- *        description: Query successful
- *      "500":
- *        description: Internal server error
- *      "501":
- *        description: MongoDB Exception
- */
+ * /api/security-questions:
+ *   get:
+ *     tags:
+ *       - Security Questions
+ *     description:  API for returning all Security Questions
+ *     summary: returns all user security question
+ *     responses:
+ *       '200':
+ *         description: List of security questions
+ *       '500':
+ *         description: Server exception
+ *       '501':
+ *         description: MongoDB exception
+ * */
 router.get("/", async (req, res) => {
   try {
+    /* finds all security questions if isDisabled key is set to false */
     SecurityQuestion.find({})
       .where("isDisabled")
       .equals(false)
-      .exec(function (err, securityQuestions) {
+      .exec(function (err, securityQuestion) {
         if (err) {
+          /* handles server error */
           console.log(err);
-          const findAllMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
+          const findAllMongodbErrorResponse = new ErrorResponse(500, "Internal Server Error", err);
           res.status(500).send(findAllMongodbErrorResponse.toObject());
         } else {
-          console.log(securityQuestions);
-          const findAllResponse = new BaseResponse(200, "Query successful", securityQuestions);
+          /* returns all sq with isDisabled set to false */
+          console.log(securityQuestion);
+          const findAllResponse = new BaseResponse(200, "Query Successful", securityQuestion);
           res.json(findAllResponse.toObject());
         }
       });
   } catch (e) {
+    /* Handles error if try fails */
     console.log(e);
-    const findAllCatchErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
+    const findAllCatchErrorResponse = new ErrorResponse(500, "Internal Server Error", e.message);
     res.status(500).send(findAllCatchErrorResponse.toObject());
   }
 });
@@ -176,48 +173,38 @@ router.post("/", async (req, res) => {
  *      "501":
  *        description: MongoDB Exception
  */
-router.put('/:id', async(req,res) => {
-    try 
-    {
-        SecurityQuestion.findOne({'_id': req.params.id}, function(err, securityQuestion) {
-            if (err)
-            {
-                console.log(err);
-                const updateSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
-                res.status(500).send(updateSecurityQuestionMongodbErrorResponse.toObject())
-            }
-            else
-            {
-                console.log(securityQuestion);
-
-                securityQuestion.set({
-                    text: req.body.text
-                });
-
-                securityQuestion.save(function( err, savedSecurityQuestion) {
-                    if (err)
-                    {
-                        console.log(err);
-                        const savedSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', err);
-                        res.status(500).send(savedSecurityQuestionMongodbErrorResponse.toObject());
-                    }
-                    else
-                    {
-                        console.log(savedSecurityQuestion);
-                        const updateSecurityQuestionResponse = new BaseResponse(200, 'Query Successful', savedSecurityQuestion);
-                        res.json(updateSecurityQuestionResponse.toObject());
-                    }
-                })
-            }
-        })
-    }
-    catch (e)
-    {
-        console.log(e);
-        const updateSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, 'Internal server error', e.message);
+router.put("/:id", async (req, res) => {
+  try {
+    SecurityQuestion.findOne({ _id: req.params.id }, function (err, securityQuestion) {
+      if (err) {
+        console.log(err);
+        const updateSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
         res.status(500).send(updateSecurityQuestionMongodbErrorResponse.toObject());
+      } else {
+        console.log(securityQuestion);
 
-    }
+        securityQuestion.set({
+          text: req.body.text,
+        });
+
+        securityQuestion.save(function (err, savedSecurityQuestion) {
+          if (err) {
+            console.log(err);
+            const savedSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
+            res.status(500).send(savedSecurityQuestionMongodbErrorResponse.toObject());
+          } else {
+            console.log(savedSecurityQuestion);
+            const updateSecurityQuestionResponse = new BaseResponse(200, "Query Successful", savedSecurityQuestion);
+            res.json(updateSecurityQuestionResponse.toObject());
+          }
+        });
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    const updateSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
+    res.status(500).send(updateSecurityQuestionMongodbErrorResponse.toObject());
+  }
 });
 /**
  * deleteSecurityQuestions
