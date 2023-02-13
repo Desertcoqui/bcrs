@@ -67,10 +67,10 @@ const openapiSpecification = swaggerJsdoc(options);
 /**
  * APIs
  */
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
-app.use("/api/users", UserApi);
-app.use("api/session", SessionApi);
-app.use("/api/security-questions", SecurityQuestionApi);
+app.set("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+app.set("/api/users", UserApi);
+app.set("api/session", SessionApi);
+app.set("/api/security-questions", SecurityQuestionApi);
 
 // Wire-up the Express server.
 app.listen(PORT, () => {
