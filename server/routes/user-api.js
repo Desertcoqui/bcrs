@@ -80,6 +80,7 @@ router.post("/", async (req, res) => {
     res.status(500).send(createUserCatchErrorResponse.toObject());
   }
 });
+
 /**
  * findAll
  * @openapi
@@ -118,8 +119,8 @@ router.get("/", async (req, res) => {
 /**
  * findById
  * @openapi
- * /api/user/{id}
- *  post:
+ * /api/user/{id}:
+ *  get:
  *      tags:
  *          - user
  *      description: API to find a list of all users
@@ -222,7 +223,7 @@ router.post("/:id", async (req, res) => {
  * deleteUser
  * @openapi
  * /api/user/{id}
- *  post:
+ *  delete:
  *      tags:
  *          - user
  *      description: API to delete a user
