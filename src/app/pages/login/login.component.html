@@ -11,7 +11,7 @@ Attributions: class lecture
     <mat-toolbar-row>
         <div class="layout-header-container">
             <p id="large-tex" class="layout-header-text comic-text">
-                Bod's Computer Repair shop <br/><br/><br/>
+                Bod's Computer Repair shop <br /><br /><br />
             </p>
         </div>
     </mat-toolbar-row>
@@ -21,7 +21,7 @@ Attributions: class lecture
 <div fxlayout="row wrap" fxLayoutAlign="center start">
     <div fxFlex="65">
 
-        <br/><br/>
+        <br /><br />
 
         <mat-card class="card-container mat-elevation-z4">
 
@@ -34,51 +34,55 @@ Attributions: class lecture
                 </mat-card-subtitle>
             </mat-card-header>
 
-            <br/>
+            <br />
 
             <mat-card-content>
 
                 <!--if there is an error message-->
 
-                <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+                <p-messages [(value)]="errorMessage" [enableService]="false"></p-messages>
 
                 <mat-card class="mat-elevation-z0">
 
-                    
+
                     <form [formGroup]="loginForm" (ngSubmit)="login(); loginForm.reset()">
 
                         <mat-card-content fxLayout="column" fxLayoutGap="10px">
-                            
+
                             <!--Below are the form field for password, username -->
                             <mat-form-field fxFlex appearance="fill">
                                 <mat-label>Username</mat-label>
-                                <input type="text" matInput formControlName="userName"/>
+                                <input type="text" matInput formControlName="userName" />
 
-                                <mat-error class="error" *ngIf="loginForm.controls['userName'].hasError('required ') && loginForm.controls['userName'].touched">
+                                <mat-error class="error"
+                                    *ngIf="loginForm.controls['userName'].hasError('required ') && loginForm.controls['userName'].touched">
                                     Username is a required field.
                                 </mat-error>
                             </mat-form-field>
 
                             <mat-form-field fxFlex appearance="fill">
                                 <mat-label>password</mat-label>
-                                <input type="password" matInput formControlName="userName"/>
+                                <input type="password" matInput formControlName="userName" />
 
-                                <mat-error class="error" *ngIf="loginForm.controls['password'].hasError('required ') && loginForm.controls['password'].touched">
+                                <mat-error class="error"
+                                    *ngIf="loginForm.controls['password'].hasError('required ') && loginForm.controls['password'].touched">
                                     Password is a required field.
                                 </mat-error>
 
-                                <mat-error class="error" *ngIf="loginForm.controls['password'].hasError('pattern ') && loginForm.controls['password'].touched">
+                                <mat-error class="error"
+                                    *ngIf="loginForm.controls['password'].hasError('pattern ') && loginForm.controls['password'].touched">
                                     Password must be at least 8 characters, contain one letter, and one number.
                                 </mat-error>
                             </mat-form-field>
 
                         </mat-card-content>
-                        
+
                         <mat-card-actions>
-                            <button type="submit" style="height: 50px; font-size: 18px" [disable]="!loginForm.valid" fxFlex mat-raised-button color="accent"> submit</button>
+                            <button type="submit" style="height: 50px; font-size: 18px" [disable]="!loginForm.valid"
+                                fxFlex mat-raised-button color="accent"> submit</button>
                         </mat-card-actions>
 
-                        <br/>
+                        <br />
 
                         <!-- The form footer links -->
                         <div fxLayout="row">
@@ -91,7 +95,7 @@ Attributions: class lecture
                                     <a class="login-footer-link" routerLink="/">Forgot password?</a>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </form>
                 </mat-card>
