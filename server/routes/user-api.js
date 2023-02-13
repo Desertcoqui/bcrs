@@ -14,6 +14,10 @@ const ErrorResponse = require("../services/error-response");
 
 const router = express.Router();
 const saltRounds = 10; // default salt rounds for hashing algorithm
+
+/**
+ * CreateUser
+ */
 /**
  * createUser
  * @openapi
@@ -82,65 +86,74 @@ router.post("/", async (req, res) => {
 });
 
 /**
+ * FindAll
+ */
+/**
  * findAll
  * @openapi
  * /api/users:
- *  get:
- *      tags:
- *          - Users
- *      description: This Api for returning an array users objects
- *      summary: Return a list of all users
- *      responses:
- *          '200':
- *              description: array of users
- *          '500':
- *              description: Server Exception.
- *          '501':
- *              description: MongoDB Exception
+ *   get:
+ *     tags:
+ *       - Users
+ *     description: API for returning an array of users from MongoDB Atlas.
+ *     summary: Returns an array of users
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '500':
+ *         description: Internal server error
+ *       '501':
+ *         description: MongoDB Exception
  */
 router.get("/", async (req, res) => {
   try {
-    User.find({}, function (err, users) {
-      if (err) {
-        console.log(err);
-        const findAllMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
-        res.status(500).send(findAllMongodbErrorResponse.toObject());
-      } else {
-        console.log(users);
-        const findAllUsersResponse = new BaseResponse(200, "Query successful", users);
-        res.json(findAllUsersResponse.toObjet());
-      }
-    });
+    User.find({})
+      .where("isDisabled")
+      .equals(false)
+      .exec(function (err, users) {
+        if (err) {
+          console.log(err);
+          const findAllMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
+          res.status(500).send(findAllMongodbErrorResponse.toObject());
+        } else {
+          console.log(users);
+          const findAllUsersResponse = new BaseResponse(200, "Query successful", users);
+          res.json(findAllUsersResponse.toObject());
+        }
+      });
   } catch (e) {
     const findAllCatchErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
     res.status(500).send(findAllCatchErrorResponse.toObject());
   }
 });
 /**
+ * FindById
+ */
+/**
  * findById
  * @openapi
- * /api/user/{id}:
+ * /api/users/{id}:
  *  get:
- *      tags:
- *          - user
- *      description: API to find a list of all users
- *      summary: find all users
- *      parameters:
- *          - in: path
- *            name: id
- *            description: the id of the employee to update
- *            required: yes
- *            schema:
- *              type: number
- *      response:
- *          '200':
- *              description: The updated document
- *          '500':
- *              description: Server Exception
- *          '501':
- *              description: MongoDB Exception
+ *    tags:
+ *      - Users
+ *    description: API for returning a single user object from MongoDB
+ *    summary: Returns a user document
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        description: The user id requested by user
+ *        schema:
+ *          type: string
+ *    responses:
+ *      "200":
+ *        description: Query successful
+ *      "500":
+ *        description: Internal server error
+ *      "501":
+ *        description: MongoDB Exception
  */
-router.get(":/id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     User.findOne({ _id: req.params.id }, function (err, user) {
       if (err) {
@@ -148,42 +161,76 @@ router.get(":/id", async (req, res) => {
         const findByIdMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
         res.status(500).send(findByIdMongodbErrorResponse.toObject());
       } else {
-        console.log(users);
-        const findByIdResponse = new BaseResponse(200, "Query successful", users);
-        res.json(findByIdResponse.toObjet());
+        console.log(user);
+        const findByIdResponse = new BaseResponse(200, "Query successful", user);
+        res.json(findByIdResponse.toObject());
       }
     });
   } catch (e) {
     console.log(e);
-    const findByIdCatchErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
+    const findByIdCatchErrorResponse = new ErrorResponse(500, "Internal server error", e);
     res.status(500).send(findByIdCatchErrorResponse.toObject());
   }
 });
+
+/**
+ * UpdateUser
+ */
 /**
  * updateUser
  * @openapi
- * /api/user/{id}
- *  post:
- *      tags:
- *          - user
- *      description: This api update a user
- *      summary: update an employee
- *      parameters:
- *          - in: path
- *            name: id
- *            description: the id of the employee to update
- *            required: yes
- *            schema:
- *              type: number
- *      response:
- *          '200':
- *              description: The updated document
- *          '500':
- *              description: Server Exception
- *          '501':
- *              description: MongoDB Exception
+ * /api/users/{id}:
+ *   put:
+ *     tags:
+ *       - Users
+ *     description: API to update user objects
+ *     summary: Updates a user object
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The user's id
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - firstName
+ *               - lastName
+ *               - phoneNumber
+ *               - address
+ *               - email
+ *               - role
+ *             properties:
+ *              firstName:
+ *                description: User's first name
+ *                type: string
+ *              lastName:
+ *                description: User's last name
+ *                type: string
+ *              phoneNumber:
+ *                description: User's phone number
+ *                type: number
+ *              address:
+ *                description: User's mailing address
+ *                type: string
+ *              email:
+ *                description: User's email address
+ *                type: string
+ *              role:
+ *                type: string
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '500':
+ *         description: Internal server error
+ *       '501':
+ *         description: MongoDB Exception
  */
-router.post("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     User.findOne({ _id: req.params.id }, function (err, user) {
       if (err) {
@@ -199,11 +246,13 @@ router.post("/:id", async (req, res) => {
           phoneNumber: req.body.phoneNumber,
           address: req.body.address,
           email: req.body.email,
+          "role.text": req.body.role,
         });
+
         user.save(function (err, savedUser) {
           if (err) {
             console.log(err);
-            const saveUserMongodbErrorResponse = new ErrorResponse(500, "Iternal server error", err);
+            const saveUserMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
             res.status(500).send(saveUserMongodbErrorResponse.toObject());
           } else {
             console.log(savedUser);
@@ -220,28 +269,31 @@ router.post("/:id", async (req, res) => {
   }
 });
 /**
+ * DeleteUser
+ */
+/**
  * deleteUser
  * @openapi
- * /api/user/{id}
- *  delete:
- *      tags:
- *          - user
- *      description: API to delete a user
- *      summary: Delete a user
- *      parameters:
- *          - in: path
- *            name: id
- *            description: the id of the employee to update
- *            required: yes
- *            schema:
- *              type: number
- *      response:
- *          '200':
- *              description: The updated document
- *          '500':
- *              description: Server Exception
- *          '501':
- *              description: MongoDB Exception
+ * /api/users/{id}:
+ *   delete:
+ *     tags:
+ *       - Users
+ *     description: API to delete user objects
+ *     summary: Deletes a user object
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The user's id
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Query successful
+ *       '500':
+ *         description: Internal server error
+ *       '501':
+ *         description: MongoDB Exception
  */
 router.delete("/:id", async (req, res) => {
   try {
@@ -255,14 +307,13 @@ router.delete("/:id", async (req, res) => {
 
         user.set({
           isDisabled: true,
-          dateModified: new Date(),
         });
 
         user.save(function (err, savedUser) {
           if (err) {
             console.log(err);
-            const savedSecurityQuestionMongodbErrorResponse = new ErrorResponse(500, "Internal server error");
-            res.json(savedSecurityQuestionMongodbErrorResponse.toObject());
+            const savedUserMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
+            res.json(savedUserMongodbErrorResponse.toObject());
           } else {
             console.log(savedUser);
             const savedUserResponse = new BaseResponse(200, "Query successful", savedUser);
@@ -277,4 +328,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).send(deleteUserCatchErrorResponse.toObject());
   }
 });
+
 module.exports = router;
