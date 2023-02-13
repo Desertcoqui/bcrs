@@ -24,14 +24,6 @@ const UserApi = require("./routes/user-api");
 const SessionApi = require("./routes/session-api");
 const SecurityQuestionApi = require("./routes/security-question-api");
 
-/**
- * App configurations.
- */
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "../dist/bcrs")));
-app.use("/", express.static(path.join(__dirname, "../dist/bcrs")));
-
 // default server port value.
 const PORT = process.env.PORT || 3000;
 
@@ -53,7 +45,6 @@ mongoose
 const options = {
   definition: {
     openapi: "3.0.0",
-    explorer: true,
     info: {
       title: "WEB 450 RESTful APIs",
       version: "1.0.0",
@@ -67,9 +58,15 @@ const openapiSpecification = swaggerJsdoc(options);
 /**
  * APIs
  */
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "../dist/bcrs")));
+app.use("/", express.static(path.join(__dirname, "../dist/bcrs")));
+
 app.set("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.set("/api/users", UserApi);
-app.set("api/session", SessionApi);
+app.set("/api/session", SessionApi);
 app.set("/api/security-questions", SecurityQuestionApi);
 
 // Wire-up the Express server.
