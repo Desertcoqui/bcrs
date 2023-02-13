@@ -36,10 +36,7 @@ const routes: Routes = [
         path: "users/:userId",
         component: UserDetailsComponent,
       },
-      {
-        path: "users/create/new",
-        component: UserDetailsComponent,
-      },
+
       {
         path: "users/create/new",
         component: UserCreateComponent,
