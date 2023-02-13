@@ -59,6 +59,7 @@ app.set("/api/security-questions", SecurityQuestionApi);
 /**
  * Database connection.
  */
+mongoose.set("strictQuery", false);
 mongoose
   .connect(CONN)
   .then(() => {
