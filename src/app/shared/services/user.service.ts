@@ -1,3 +1,11 @@
+/**
+ * Title: session.service.js
+ * Author: Professor Krasso
+ * Modified: Manel Phiseme
+ * Date : 02/12/2023
+ * Description: CRUD APIS for users
+ */
+
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.interface';
 import { HttpClient } from '@angular/common/http';

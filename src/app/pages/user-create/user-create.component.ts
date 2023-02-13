@@ -1,3 +1,12 @@
+/**
+ * user-create.component.ts
+ * Author: Professor Krasso
+ * Modified: Manel Phiseme
+ * Date : 02/12/2023
+ * Description: ts code for user create page
+ */
+
+//imported statement
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
@@ -11,7 +20,8 @@ import { User } from '../../shared/models/user.interface';
   styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {
-
+   
+  //codes for user input validation
   form: FormGroup = this.fb.group({
     userName: [null, Validators.compose([Validators.required])],
     password: [null, Validators.compose([Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-za-z\\d]{8,}$')])],
@@ -33,6 +43,7 @@ export class UserCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //user input are stored in variable CreateUser
   createUser(): void{
     const newUser: User = {
       userName: this.form.controls['userName'].value,

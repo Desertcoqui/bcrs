@@ -1,3 +1,11 @@
+<!--
+ Title: login.component.html (Bobs Computer Repair Shop)
+ Author: Professor Krasso
+ Date: 02/12/2023
+ Modified By: Manel Phiseme
+Attributions: class lecture
+-->
+
 <mat-toolbar color="primary" style="border-bottom: 15px solid #D6A800">
     <mat-toolbar-row></mat-toolbar-row>
     <mat-toolbar-row>
@@ -17,6 +25,7 @@
 
         <mat-card class="card-container mat-elevation-z4">
 
+            <!--The Form header-->
             <mat-card-header>
                 <mat-card-title class="mat-headline card-title login-title">Employee Sign-in Page</mat-card-title>
 
@@ -28,16 +37,19 @@
             <br/>
 
             <mat-card-content>
+
                 <!--if there is an error message-->
 
                 <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
 
                 <mat-card class="mat-elevation-z0">
 
+                    
                     <form [formGroup]="loginForm" (ngSubmit)="login(); loginForm.reset()">
 
                         <mat-card-content fxLayout="column" fxLayoutGap="10px">
-
+                            
+                            <!--Below are the form field for password, username -->
                             <mat-form-field fxFlex appearance="fill">
                                 <mat-label>Username</mat-label>
                                 <input type="text" matInput formControlName="userName"/>
@@ -61,13 +73,14 @@
                             </mat-form-field>
 
                         </mat-card-content>
-
+                        
                         <mat-card-actions>
                             <button type="submit" style="height: 50px; font-size: 18px" [disable]="!loginForm.valid" fxFlex mat-raised-button color="accent"> submit</button>
                         </mat-card-actions>
 
                         <br/>
 
+                        <!-- The form footer links -->
                         <div fxLayout="row">
                             <div class="login-footer-container">
                                 <div fxFlex class="center-text">

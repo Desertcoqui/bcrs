@@ -1,3 +1,11 @@
+/**
+ * login.component.ts
+ * Author: Professor Krasso
+ * Modified: Manel Phiseme
+ * Date : 02/12/2023
+ * Description: ts code for login page
+ */
+
 import { Component, OnInit } from '@angular/core';
 import {SessionService} from "../../shared/services/session.service";
 import {HttpClient} from "@angular/common/http";

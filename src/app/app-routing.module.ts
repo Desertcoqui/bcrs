@@ -1,3 +1,11 @@
+/**
+ * app-routing.module.ts
+ * Author: Professor Krasso
+ * Modified: Manel Phiseme
+ * Date : 02/12/2023
+ * Description: tis code define the application routes
+ */
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {BaseLayoutComponent} from "./shared/base-layout/base-layout.component";

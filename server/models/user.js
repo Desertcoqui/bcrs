@@ -1,3 +1,11 @@
+/**
+ * user.js
+ * Author: Professor Krasso
+ * Modified: Manel Phiseme
+ * Date : 02/12/2023
+ * Description: user model /schema
+ */
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const UserRoleSchema = require("../schemas/user-roles");
