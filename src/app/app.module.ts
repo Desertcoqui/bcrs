@@ -51,6 +51,9 @@ import { TableModule } from "primeng/table";
 import { MessageModule } from "primeng/message";
 import { MessagesModule } from "primeng/messages";
 
+//fixed errors
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -100,5 +103,6 @@ import { MessagesModule } from "primeng/messages";
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
