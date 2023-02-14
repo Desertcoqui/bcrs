@@ -50,12 +50,16 @@ const router = express.Router();
  */
 router.post("/login", async (req, res) => {
   try {
+    //test username 
+    console.log("test user name value")
+    console.log(req.body.userName)
     User.findOne({ userName: req.body.userName }, function (err, user) {
       if (err) {
         console.log(err);
         const signinMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
         res.status(500).send(signinMongodbErrorResponse.toObject());
       } else {
+        console.log("test user Database")
         console.log(user);
 
         /**

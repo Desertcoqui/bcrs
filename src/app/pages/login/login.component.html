@@ -62,7 +62,7 @@ Attributions: class lecture
 
                             <mat-form-field fxFlex appearance="fill">
                                 <mat-label>password</mat-label>
-                                <input type="password" matInput formControlName="userName" />
+                                <input type="password" matInput formControlName="password" />
 
                                 <mat-error class="error"
                                     *ngIf="loginForm.controls['password'].hasError('required ') && loginForm.controls['password'].touched">
@@ -78,7 +78,7 @@ Attributions: class lecture
                         </mat-card-content>
 
                         <mat-card-actions>
-                            <button type="submit" style="height: 50px; font-size: 18px" [disabled]="!loginForm.valid" fxFlex mat-raised-button color="accent">Submit</button>
+                            <button type="submit" style="height: 50px; font-size: 18px" [disabled]="!loginForm.valid"  fxFlex mat-raised-button color="accent">Submit</button>
                         </mat-card-actions>
 
                         <br />
