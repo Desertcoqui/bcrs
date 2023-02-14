@@ -45,16 +45,15 @@ const openapiSpecification = swaggerJsdoc(options);
 /**
  * APIs
  */
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../dist/bcrs")));
 app.use("/", express.static(path.join(__dirname, "../dist/bcrs")));
 
-app.set("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
-app.set("/api/users", UserApi);
-app.set("/api/session", SessionApi);
-app.set("/api/security-questions", SecurityQuestionApi);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+app.use("/api/users", UserApi);
+app.use("/api/session", SessionApi);
+app.use("/api/security-questions", SecurityQuestionApi);
 
 /**
  * Database connection.

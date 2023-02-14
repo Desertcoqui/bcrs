@@ -106,3 +106,5 @@ router.post("/login", async (req, res) => {
     res.status(500).send(signinCatchErrorResponse.toObject());
   }
 });
+
+module.exports = router;
