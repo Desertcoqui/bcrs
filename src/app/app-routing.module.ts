@@ -38,10 +38,6 @@ const routes: Routes = [
       },
 
       {
-        path: "users/create/new",
-        component: UserCreateComponent,
-      },
-      {
         path: "security-questions",
         component: SecurityQuestionListComponent,
       },
@@ -59,6 +55,10 @@ const routes: Routes = [
       {
         path: "login",
         component: LoginComponent,
+      },
+      {
+        path: "register",
+        component: UserCreateComponent,
       },
     ],
   },
