@@ -33,6 +33,10 @@ const routes: Routes = [
         component: UserListComponent,
       },
       {
+        path: "users/create/new",
+        component: UserCreateComponent,
+      },
+      {
         path: "users/:userId",
         component: UserDetailsComponent,
       },
@@ -55,10 +59,6 @@ const routes: Routes = [
       {
         path: "login",
         component: LoginComponent,
-      },
-      {
-        path: "register",
-        component: UserCreateComponent,
       },
     ],
   },
