@@ -28,7 +28,7 @@ const SecurityQuestionApi = require("./routes/security-question-api");
 const PORT = process.env.PORT || 3000;
 
 // created database on Feb 10 8:24AM Central Time
-const CONN = "mongodb+srv://admin:s3cret@bcrsdb.hdw2zdb.mongodb.net/?retryWrites=true&w=majority";
+const CONN = "mongodb+srv://admin:s3cret@bcrsdb.hdw2zdb.mongodb.net/bcrsDB?retryWrites=true&w=majority";
 const options = {
   definition: {
     openapi: "3.0.0",
