@@ -111,4 +111,61 @@ router.post("/login", async (req, res) => {
   }
 });
 
+/**
+ * VerifyUser
+ * @openapi
+ * /api/user/verify/users/{userName}:
+ *  get:
+ *    tags:
+ *      - User
+ *    description: Api to verify user
+ *    summary: Return verified user
+ *    parameters:
+ *      - name: userName
+ *        in: path
+ *        required: true
+ *        description: The name of the user that need to be verified
+ *        schema:
+ *          type: string
+ *    responses:
+ *      "200":
+ *        description: Query successful
+ *      "500":
+ *        description: Internal server error
+ *      "501":
+ *        description: MongoDB Exception
+ */
+
+router.get('/verify/users/:userName', async (req, res)=>{
+  try {
+
+    User.findOne({'userName': req.params.userName}, function(err, user){
+      if(err){
+        console.log(err);
+        const verifyUserMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
+        res.status(500).send(verifyUserMongodbErrorResponse.toObject());
+
+      }
+      else {
+        if(user){
+          console.log(user);
+          const verifyUserResponse = new BaseResponse('200', 'Query successful', user);
+          res.json(verifyUserResponse.toObject());
+
+        }else{
+          const invalidUsernameResponse = new BaseResponse('400', 'Invalid username', req.params.userName);
+          res.status(400).send(invalidUsernameResponse.toObject());
+        }
+
+      }
+    })
+  }
+  catch (e){
+    console.log(e);
+    const verifyUserCatchErrorResponse = new ErrorResponse('500', 'Internal server error', e.message);
+    res.status(500).send(verifyUserCatchErrorResponse.toObject());
+
+  }
+})
+
 module.exports = router;
