@@ -1,3 +1,12 @@
+/**
+ * reset-password-form.component.ts
+ * Author: Professor Krasso
+ * Modified: Manel Phiseme
+ * Date : 02/18/2023
+ * Description: Reset-password code for user create page
+ */
+
+//imported statement
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
@@ -27,7 +36,7 @@ export class ResetPasswordFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /** 
+  
   updatepassword(){
     const password = this.form.controls['password'].value;
     this.sessionService.updatePassword(password, this.username).subscribe({
@@ -39,6 +48,6 @@ export class ResetPasswordFormComponent implements OnInit {
         console.log(e);
       }
     })
-  }*/
+  }
 
 }
