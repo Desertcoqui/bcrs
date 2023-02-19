@@ -50,16 +50,12 @@ const router = express.Router();
  */
 router.post("/login", async (req, res) => {
   try {
-    //test username 
-    console.log("test user name value")
-    console.log(req.body.userName)
     User.findOne({ userName: req.body.userName }, function (err, user) {
       if (err) {
         console.log(err);
         const signinMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
         res.status(500).send(signinMongodbErrorResponse.toObject());
       } else {
-        console.log("test user Database")
         console.log(user);
 
         /**
@@ -135,35 +131,28 @@ router.post("/login", async (req, res) => {
  *        description: MongoDB Exception
  */
 
-router.get('/verify/users/:userName', async (req, res)=>{
+router.get("/verify/users/:userName", async (req, res) => {
   try {
-
-    User.findOne({'userName': req.params.userName}, function(err, user){
-      if(err){
+    User.findOne({ userName: req.params.userName }, function (err, user) {
+      if (err) {
         console.log(err);
-        const verifyUserMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
+        const verifyUserMongodbErrorResponse = new ErrorResponse("500", "Internal server error", err);
         res.status(500).send(verifyUserMongodbErrorResponse.toObject());
-
-      }
-      else {
-        if(user){
+      } else {
+        if (user) {
           console.log(user);
-          const verifyUserResponse = new BaseResponse('200', 'Query successful', user);
+          const verifyUserResponse = new BaseResponse("200", "Query successful", user);
           res.json(verifyUserResponse.toObject());
-
-        }else{
-          const invalidUsernameResponse = new BaseResponse('400', 'Invalid username', req.params.userName);
+        } else {
+          const invalidUsernameResponse = new BaseResponse("400", "Invalid username", req.params.userName);
           res.status(400).send(invalidUsernameResponse.toObject());
         }
-
       }
-    })
-  }
-  catch (e){
+    });
+  } catch (e) {
     console.log(e);
-    const verifyUserCatchErrorResponse = new ErrorResponse('500', 'Internal server error', e.message);
+    const verifyUserCatchErrorResponse = new ErrorResponse("500", "Internal server error", e.message);
     res.status(500).send(verifyUserCatchErrorResponse.toObject());
-
   }
 });
 /**
@@ -198,22 +187,21 @@ router.get('/verify/users/:userName', async (req, res)=>{
  *       '501':
  *         description: MongoDB Exception
  */
-router.post('/register', async(req, res) => {
+router.post("/register", async (req, res) => {
   try {
-    User.findOne({'userName': req.body.userName}, function(err, user)
-    {
-      if(err) {
+    User.findOne({ userName: req.body.userName }, function (err, user) {
+      if (err) {
         console.log(err);
-        const registerUserMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
+        const registerUserMongodbErrorResponse = new ErrorResponse("500", "Internal server error", err);
         res.status(500).send(registerUserMongodbErrorResponse.toObject());
       } else {
         if (!user) {
           let hashedPassword = bycrypt.hashSync(req.body.password, saltRounds); // salt/hash password
           standardRole = {
-            text: 'standard'
-          }
+            text: "standard",
+          };
 
-          //user object 
+          //user object
           let registeredUser = {
             userName: req.body.userName,
             password: hashedPassword,
@@ -223,29 +211,29 @@ router.post('/register', async(req, res) => {
             address: req.body.address,
             email: req.body.email,
             role: standardRole,
-            selectedSecurityQuestions: req.body.selectedSecurityQuestions
+            selectedSecurityQuestions: req.body.selectedSecurityQuestions,
           };
 
-          User.create(registeredUser, function(err, newUser) {
+          User.create(registeredUser, function (err, newUser) {
             if (err) {
               console.log(err);
-              const newUserMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
+              const newUserMongodbErrorResponse = new ErrorResponse("500", "Internal server error", err);
             } else {
-              console.log(newUser); 
-              const registeredUserResponse = new BaseResponse('200', 'Query successful', newUser);
+              console.log(newUser);
+              const registeredUserResponse = new BaseResponse("200", "Query successful", newUser);
               res.json(registeredUserResponse.toObject());
             }
-          })
+          });
         } else {
-          console.log('Username ${req.body.userName} already exists.');
-          const userInUseError = new BaseResponse('400', 'The username ${req.body.userName} is already in use.', null);
+          console.log("Username ${req.body.userName} already exists.");
+          const userInUseError = new BaseResponse("400", "The username ${req.body.userName} is already in use.", null);
           res.status(400).send(userInUseError.toObject());
         }
       }
-    })
+    });
   } catch (e) {
     console.log(e);
-    const registeredUserCatchErrorResponse = new ErrorResponse('500', 'Internal server error', e.message);
+    const registeredUserCatchErrorResponse = new ErrorResponse("500", "Internal server error", e.message);
     res.status(500).send(registeredUserCatchErrorResponse.toObject());
   }
 });
@@ -281,37 +269,37 @@ router.post('/register', async(req, res) => {
  *       '501':
  *         description: MongoDB Exception
  */
-router.post('/users/:username/reset-password', async(req, res) => {
+router.post("/users/:username/reset-password", async (req, res) => {
   try {
     const password = req.body.password;
-    User.findOne({'username': req.params.userName}, function(err, user) {
+    User.findOne({ username: req.params.userName }, function (err, user) {
       if (err) {
         console.log(err);
-        const resetPasswordMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
+        const resetPasswordMongodbErrorResponse = new ErrorResponse("500", "Internal server error", err);
         res.status(500).send(resetPasswordMongodbErrorResponse.toObject());
       } else {
         console.log(user);
         let hashedPassword = bycrypt.hashSync(password, saltRounds); //salt/hash password
         user.set({
-          password: hashedPassword
+          password: hashedPassword,
         });
 
-        user.save(function(err, updatedUser) {
+        user.save(function (err, updatedUser) {
           if (err) {
             console.log(err);
-            const updatedUserMongodbErrorREsponse = new ErrorResponse('500', 'Internal server error', err);
+            const updatedUserMongodbErrorREsponse = new ErrorResponse("500", "Internal server error", err);
             res.status(500).send(updatedUserMongodbErrorREsponse.toObject());
           } else {
             console.log(updatedUser);
-            const updatedPasswordResponse = new BaseResponse('200', 'Query successful', updatedUser);
+            const updatedPasswordResponse = new BaseResponse("200", "Query successful", updatedUser);
             res.json(updatedPasswordResponse.toObject());
           }
-        })
+        });
       }
-    })
+    });
   } catch (e) {
     console.log(e);
-    const resetPasswordCatchError = new ErrorResponse('500', 'Internal server error', e);
+    const resetPasswordCatchError = new ErrorResponse("500", "Internal server error", e);
     res.status(500).send(resetPasswordCatchError.toObject());
   }
 });
