@@ -56,6 +56,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ResetPasswordFormComponent } from './shared/reset-password-form/reset-password-form/reset-password-form.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { VerifySecurityQuestionsComponent } from './shared/forms/verify-security-questions/verify-security-questions.component';
 
 @NgModule({
   
@@ -106,6 +108,8 @@ import { ErrorComponent } from './pages/error/error.component';
     ResetPasswordFormComponent,
     NotFoundComponent,
     ErrorComponent,
+    ContactUsComponent,
+    VerifySecurityQuestionsComponent,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],
