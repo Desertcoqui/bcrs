@@ -54,7 +54,12 @@ import { MessagesModule } from "primeng/messages";
 //fixed errors
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ResetPasswordFormComponent } from './shared/reset-password-form/reset-password-form/reset-password-form.component';
+<<<<<<< HEAD
 import { AboutComponent } from './pages/about/about.component';
+=======
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ErrorComponent } from './pages/error/error.component';
+>>>>>>> 1fb8e44e4e07774f8a041464f0115e16add3cc71
 
 @NgModule({
   
@@ -103,7 +108,12 @@ import { AboutComponent } from './pages/about/about.component';
     SecurityQuestionDetailsComponent,
     SecurityQuestionListComponent,
     ResetPasswordFormComponent,
+<<<<<<< HEAD
     AboutComponent,
+=======
+    NotFoundComponent,
+    ErrorComponent,
+>>>>>>> 1fb8e44e4e07774f8a041464f0115e16add3cc71
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],
