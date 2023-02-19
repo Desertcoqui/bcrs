@@ -12,6 +12,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
 import {SessionService} from "../../services/session.service";
+//import {NgModule} from '@angular/core';
 
 @Component({
   selector: 'app-reset-password-form',
@@ -29,6 +30,7 @@ export class ResetPasswordFormComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder,
     private cookieService: CookieService, private sessionService: SessionService) {
+
       this.isAuthenticated = this.route.snapshot.queryParamMap.get('isAuthenticated') ?? '';
       this.username = this.route.snapshot.queryParamMap.get('username') ?? '';
      }
@@ -37,7 +39,7 @@ export class ResetPasswordFormComponent implements OnInit {
   }
 
   
-  updatepassword(){
+  updatePassword(){
     const password = this.form.controls['password'].value;
     this.sessionService.updatePassword(password, this.username).subscribe({
       next: (res) =>{
