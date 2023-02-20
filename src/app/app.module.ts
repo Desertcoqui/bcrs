@@ -50,14 +50,16 @@ import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { TableModule } from "primeng/table";
 import { MessageModule } from "primeng/message";
 import { MessagesModule } from "primeng/messages";
-
-//fixed errors
+//added Sprint 2
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { ResetPasswordFormComponent } from "./shared/reset-password-form/reset-password-form/reset-password-form.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { ErrorComponent } from "./pages/error/error.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 import { VerifySecurityQuestionsComponent } from "./shared/forms/verify-security-questions/verify-security-questions.component";
+import { AboutComponent } from "./pages/about/about.component";
+import { RegisterComponent } from "./pages/register/register.component";
+import { VerifyUsernameFormComponent } from "./shared/forms/verify-username-form/verify-username-form.component";
 
 @NgModule({
   imports: [
@@ -109,6 +111,10 @@ import { VerifySecurityQuestionsComponent } from "./shared/forms/verify-security
     ErrorComponent,
     ContactUsComponent,
     VerifySecurityQuestionsComponent,
+    AboutComponent,
+    VerifySecurityQuestionsComponent,
+    VerifyUsernameFormComponent,
+    RegisterComponent,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],
