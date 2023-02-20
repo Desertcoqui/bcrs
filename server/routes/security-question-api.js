@@ -153,7 +153,7 @@ router.post("/", async (req, res) => {
  * updateSecurityQuestion
  * @openapi
  * /api/security-questions/{id}:
- *  get:
+ *  put:
  *    tags:
  *      - Security Questions
  *    description: API to update security question objects

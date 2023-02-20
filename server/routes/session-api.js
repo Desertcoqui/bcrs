@@ -109,7 +109,7 @@ router.post("/login", async (req, res) => {
 /**
  * VerifyUser
  * @openapi
- * /api/user/verify/users/{userName}:
+ * /api/session/verify/users/{userName}:
  *  get:
  *    tags:
  *      - User

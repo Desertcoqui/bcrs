@@ -19,6 +19,7 @@ import { UserListComponent } from "./pages/user-list/user-list.component";
 import { AuthGuard } from "./auth.guard";
 import { LoginComponent } from "./pages/login/login.component";
 import { AboutComponent } from "./pages/about/about.component";
+import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
       {
         path: "about",
         component: AboutComponent,
+      },
+      {
+        path: "contact",
+        component: ContactUsComponent,
       },
       {
         path: "users",
