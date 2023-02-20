@@ -36,9 +36,9 @@
                 </h1>
             </mat-card-title>
 
-            <br /><br />
+            <br/><br/>
 
-            <p-message [(value)]="errorMessage" [enableService]="false"></p-message>
+            <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
 
             <form [formGroup]="form" (ngSubmit)="verifyUser()" #usernameForm>
 

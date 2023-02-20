@@ -16,6 +16,8 @@ const ErrorResponse = require("../services/error-response");
 // configuration for routes
 const router = express.Router();
 
+const saltRounds = 10; // default salt rounds for bcrypt hashing algorithm
+
 /**
  * login
  * @openapi
@@ -156,88 +158,6 @@ router.get("/verify/users/:userName", async (req, res) => {
   }
 });
 /**
- * register
- * @openapi
- * /api/session/register:
- *   post:
- *     tags:
- *       - Session
- *     description: API to register user
- *     summary: Register user
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             required:
- *               - userName
- *               - password
- *             properties:
- *              userName:
- *                type: string
- *              password:
- *                type: string
- *     responses:
- *       '200':
- *         description: Login successful
- *       '401':
- *         description: Invalid username and/or password, please try again
- *       '500':
- *         description: Internal server error
- *       '501':
- *         description: MongoDB Exception
- */
-router.post("/register", async (req, res) => {
-  try {
-    User.findOne({ userName: req.body.userName }, function (err, user) {
-      if (err) {
-        console.log(err);
-        const registerUserMongodbErrorResponse = new ErrorResponse("500", "Internal server error", err);
-        res.status(500).send(registerUserMongodbErrorResponse.toObject());
-      } else {
-        if (!user) {
-          let hashedPassword = bycrypt.hashSync(req.body.password, saltRounds); // salt/hash password
-          standardRole = {
-            text: "standard",
-          };
-
-          //user object
-          let registeredUser = {
-            userName: req.body.userName,
-            password: hashedPassword,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            phoneNumber: req.body.phoneNumber,
-            address: req.body.address,
-            email: req.body.email,
-            role: standardRole,
-            selectedSecurityQuestions: req.body.selectedSecurityQuestions,
-          };
-
-          User.create(registeredUser, function (err, newUser) {
-            if (err) {
-              console.log(err);
-              const newUserMongodbErrorResponse = new ErrorResponse("500", "Internal server error", err);
-            } else {
-              console.log(newUser);
-              const registeredUserResponse = new BaseResponse("200", "Query successful", newUser);
-              res.json(registeredUserResponse.toObject());
-            }
-          });
-        } else {
-          console.log("Username ${req.body.userName} already exists.");
-          const userInUseError = new BaseResponse("400", "The username ${req.body.userName} is already in use.", null);
-          res.status(400).send(userInUseError.toObject());
-        }
-      }
-    });
-  } catch (e) {
-    console.log(e);
-    const registeredUserCatchErrorResponse = new ErrorResponse("500", "Internal server error", e.message);
-    res.status(500).send(registeredUserCatchErrorResponse.toObject());
-  }
-});
-/**
  * resetPassword
  * @openapi
  * /api/session/users/:username/reset-password:
@@ -279,7 +199,7 @@ router.post("/users/:username/reset-password", async (req, res) => {
         res.status(500).send(resetPasswordMongodbErrorResponse.toObject());
       } else {
         console.log(user);
-        let hashedPassword = bycrypt.hashSync(password, saltRounds); //salt/hash password
+        let hashedPassword = bcrypt.hashSync(password, saltRounds); //salt/hash password
         user.set({
           password: hashedPassword,
         });
@@ -301,6 +221,88 @@ router.post("/users/:username/reset-password", async (req, res) => {
     console.log(e);
     const resetPasswordCatchError = new ErrorResponse("500", "Internal server error", e);
     res.status(500).send(resetPasswordCatchError.toObject());
+  }
+});
+/**
+ * register
+ * @openapi
+ * /api/session/register:
+ *   post:
+ *     tags:
+ *       - Session
+ *     description: API to register user
+ *     summary: Register user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             required:
+ *               - userName
+ *               - password
+ *             properties:
+ *              userName:
+ *                type: string
+ *              password:
+ *                type: string
+ *     responses:
+ *       '200':
+ *         description: Login successful
+ *       '401':
+ *         description: Invalid username and/or password, please try again
+ *       '500':
+ *         description: Internal server error
+ *       '501':
+ *         description: MongoDB Exception
+ */
+router.post("/register", async (req, res) => {
+  try {
+    User.findOne({ userName: req.body.userName }, function (err, user) {
+      if (err) {
+        console.log(err);
+        const registerUserMongodbErrorResponse = new ErrorResponse("500", "Internal server error", err);
+        res.status(500).send(registerUserMongodbErrorResponse.toObject());
+      } else {
+        if (!user) {
+          let hashedPassword = bcrypt.hashSync(req.body.password, saltRounds); // salt/hash password
+          standardRole = {
+            text: "standard",
+          };
+
+          //user object
+          let registeredUser = {
+            userName: req.body.userName,
+            password: hashedPassword,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNumber: req.body.phoneNumber,
+            address: req.body.address,
+            email: req.body.email,
+            role: standardRole,
+            selectedSecurityQuestions: req.body.selectedSecurityQuestions,
+          };
+
+          User.create(registeredUser, function (err, newUser) {
+            if (err) {
+              console.log(err);
+              const newUserMongodbErrorResponse = new ErrorResponse("500", "Internal server error", err);
+            } else {
+              console.log(newUser);
+              const registeredUserResponse = new BaseResponse("200", "Query successful", newUser);
+              res.json(registeredUserResponse.toObject());
+            }
+          });
+        } else {
+          console.log("Username ${req.body.userName} already exists.");
+          const userInUseError = new BaseResponse("400", "The username ${req.body.userName} is already in use.", null);
+          res.status(400).send(userInUseError.toObject());
+        }
+      }
+    });
+  } catch (e) {
+    console.log(e);
+    const registeredUserCatchErrorResponse = new ErrorResponse("500", "Internal server error", e.message);
+    res.status(500).send(registeredUserCatchErrorResponse.toObject());
   }
 });
 /**
