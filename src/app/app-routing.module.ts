@@ -18,6 +18,14 @@ import { UserDetailsComponent } from "./pages/user-details/user-details.componen
 import { UserListComponent } from "./pages/user-list/user-list.component";
 import { AuthGuard } from "./auth.guard";
 import { LoginComponent } from "./pages/login/login.component";
+import { AboutComponent } from "./pages/about/about.component";
+import { ContactUsComponent } from "./pages/contact-us/contact-us.component";
+import { ResetPasswordFormComponent } from "./shared/reset-password-form/reset-password-form/reset-password-form.component";
+import { NotFoundComponent } from "./pages/not-found/not-found.component";
+import { ErrorComponent } from "./pages/error/error.component";
+import { VerifySecurityQuestionsComponent } from "./shared/forms/verify-security-questions/verify-security-questions.component";
+import { RegisterComponent } from "./pages/register/register.component";
+import { VerifyUsernameFormComponent } from "./shared/forms/verify-username-form/verify-username-form.component";
 
 const routes: Routes = [
   {
@@ -27,6 +35,14 @@ const routes: Routes = [
       {
         path: "/",
         component: HomeComponent,
+      },
+      {
+        path: "about",
+        component: AboutComponent,
+      },
+      {
+        path: "contact",
+        component: ContactUsComponent,
       },
       {
         path: "users",
@@ -60,7 +76,35 @@ const routes: Routes = [
         path: "login",
         component: LoginComponent,
       },
+      {
+        path: "register",
+        component: RegisterComponent,
+      },
+      {
+        path: "forgot",
+        component: VerifyUsernameFormComponent,
+      },
+      {
+        path: "verify-security-questions",
+        component: VerifySecurityQuestionsComponent,
+      },
+      {
+        path: "reset-password",
+        component: ResetPasswordFormComponent,
+      },
+      {
+        path: "404",
+        component: NotFoundComponent,
+      },
+      {
+        path: "505",
+        component: ErrorComponent,
+      },
     ],
+  },
+  {
+    path: "**",
+    redirectTo: "session/404",
   },
 ];
 

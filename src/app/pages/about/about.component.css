@@ -1,0 +1,38 @@
+/*
+Title: about.component.css
+ Author: Professor Krasso
+ Date: 02/20/2023
+ Modified By: Manel Phiseme
+Attributions: class lecture
+*/
+
+.figure{
+    display: flex;
+    margin: 0 auto;
+       
+}
+.imgColumn {
+    margin: auto;
+    width: 60%;
+    background-color: rgb(238, 238, 243);
+    margin-bottom: 44px;
+    margin-top: 60px;
+}
+
+p {   
+    font-size: 20px;    
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 3.0;
+    text-indent: 50px;
+}
+
+.textDiv {
+    margin: auto;
+    width: 50%;   
+}
+h1 {
+    font-size: 35px;
+    text-align: center;
+    padding-top: 30px;
+    padding-top: 30px;
+}

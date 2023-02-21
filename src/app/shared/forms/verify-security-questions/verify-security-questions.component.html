@@ -1,0 +1,74 @@
+<!-- // Title: Bobs Computer Repair Shop
+// Author: Professor Krasso
+// Date: Feb 20 2023
+// Modified By: Ferdinand Detres Jr
+// Attributions: https://www.section.io/engineering-education/nodejs-mongoosejs-mongodb/
+//https://www.youtube.com/watch?v=WDrU305J1yw
+// In-Class tutorials -->
+
+<mat-toolbar color="primary" style="border-bottom: 15px rgb(161, 163, 161)">
+    <mat-toolbar-row></mat-toolbar-row>
+    <mat-toolbar-row>
+        <div class="layout-header-container">
+            <p id="large-text" class="layout-header-text arial">
+                Bob's Computer Repair Shop <br><br><br>
+            </p>
+
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
+<br><br><br>
+<mat-card-title>
+    <h1 class="title">
+        Forgot Password
+        <br>
+        <span class="subtitle">
+            Fields marked with an asterisk (*) are required.
+        </span>
+    </h1>
+</mat-card-title>
+
+<br><br>
+
+<p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+
+<form *ngIf="selectedSecurityQuestions" [formGroup]="form" (ngSubmit)="verifySecurityQuestions()" #usernameForm>
+    <mat-card-content fxLayout="column">
+
+        <!-- question 1 -->
+        <mat-form-field fxFlex appearance="fill">
+            <mat-label>{{ this.verifySecurityQuestionsModel.question1 }}</mat-label>
+            <input matInput required placeholder="Answer here" formControlName="answerToSecurityQuestion1" />
+            <mat-error class="error"
+                *ngIf="form.controls['answerToSecurityQuestion1'].hasError('required') && form.controls['answerToSecurityQuestion1'].touched">
+                Required field.
+            </mat-error>
+        </mat-form-field>
+        <!-- question 2 -->
+        <mat-form-field fxFlex appearance="fill">
+            <mat-label>{{ verifySecurityQuestionsModel.question2 }}</mat-label>
+            <input matInput required placeholder="Answer here" formControlName="answerToSecurityQuestion2" />
+            <mat-error class="error"
+                *ngIf="form.controls['answerToSecurityQuestion2'].hasError('required') && form.controls['answerToSecurityQuestion2'].touched">
+                Required field.
+            </mat-error>
+        </mat-form-field>
+        <!-- question 3 -->
+        <mat-form-field fxFlex appearance="fill">
+            <mat-label>{{ verifySecurityQuestionsModel.question3 }}</mat-label>
+            <input matInput required placeholder="Answer here" formControlName="answerToSecurityQuestion3" />
+            <mat-error class="error"
+                *ngIf="form.controls['answerToSecurityQuestion3'].hasError('required') && form.controls['answerToSecurityQuestion3'].touched">
+                Required field.
+            </mat-error>
+        </mat-form-field>
+
+        <br /><br /><br />
+        <div fxFlex fxLayoutAlign="end" class="p5">
+            <button mat-raised-button routerLink="/session/signin" color="accent">Cancel</button> &nbsp;&nbsp;
+            <button mat-raised-button [disabled]="!form.valid" color="primary">Verify Security Questions</button>
+            &nbsp;&nbsp;
+
+        </div>
+    </mat-card-content>
+</form>
