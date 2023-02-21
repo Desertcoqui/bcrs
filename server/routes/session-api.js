@@ -227,45 +227,68 @@ router.post("/users/:username/reset-password", async (req, res) => {
  * register
  * @openapi
  * /api/session/register:
- *   post:
- *     tags:
- *       - Session
- *     description: API to register user
- *     summary: Register user
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             required:
- *               - userName
- *               - password
- *               - firstName
- *               - lastName
- *               - phoneNumber
- *               - address
- *               - email
- *               - role
- *               - selectedSecurityQuestions:
- *                  type: array
- *                  items:
- *                    type: object        
- *             properties:
+ *  post:
+ *    tags:
+ *      - Session
+ *    description: API for registering new user
+ *    summary: Registers new user
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            description: User's information
+ *            required:
+ *              - userName
+ *              - password
+ *              - firstName
+ *              - lastName
+ *              - phoneNumber
+ *              - address
+ *              - email
+ *              - role
+ *              - selectedSecurityQuestions
+ *            properties:
  *              userName:
  *                type: string
  *              password:
  *                type: string
- *              
- *   
- *     responses:
- *       '200':
- *         description: Login successful
- *       '401':
- *         description: Invalid username and/or password, please try again
- *       '500':
- *         description: Internal server error
- *       '501':
- *         description: MongoDB Exception
+ *              firstName:
+ *                type: string
+ *              lastName:
+ *                type: string
+ *              phoneNumber:
+ *                type: string
+ *              address:
+ *                type: string
+ *              email:
+ *                type: string
+ *              selectedSecurityQuestions:
+ *                type: array
+ *                items:
+ *                  type: object
+ *                  properties:
+ *                    questionText:
+ *                      type: string
+ *                    answerText:
+ *                      type: string
+ *                example:
+ *                  - questionText: string
+ *                    answerText: string
+ *                  - questionText: string
+ *                    answerText: string
+ *                  - questionText: string
+ *                    answerText: string
+ *    responses:
+ *      "200":
+ *        description: Query successful
+ *      "400":
+ *        description: Invalid username
+ *      "500":
+ *        description: Internal server error
+ *      "501":
+ *        description: MongoDB Exception
  */
 router.post("/register", async (req, res) => {
   try {
