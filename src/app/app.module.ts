@@ -94,6 +94,7 @@ import { VerifyUsernameFormComponent } from "./shared/forms/verify-username-form
     MessagesModule,
     ReactiveFormsModule,
     TableModule,
+  
   ],
   declarations: [
     AppComponent,
