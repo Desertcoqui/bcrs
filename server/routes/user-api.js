@@ -329,12 +329,11 @@ router.delete("/:id", async (req, res) => {
     res.status(500).send(deleteUserCatchErrorResponse.toObject());
   }
 });
-
 /**
  * FindSelectedSecurityQuestions
  * @openapi
  * /api/users/{userName}/security-questions:
- *  get:    
+ *  get:
  *    tags:
  *      - Security Questions
  *    description: API to find Selected security Questions
@@ -352,30 +351,32 @@ router.delete("/:id", async (req, res) => {
  *      "500":
  *        description: Internal server errors
  *      "501":
- *        description: MongoDB Exception    
+ *        description: MongoDB Exception
  */
-
-router.get('/:userName/security-questions', async (req, res) => {
-  try
-  {
-    user.findOne({'userName': req.params.userName}, function(err, user){
-      if(err){
+router.get("/:userName/security-questions", async (req, res) => {
+  try {
+    user.findOne({ userName: req.params.userName }, function (err, user) {
+      if (err) {
         console.log(err);
-        const findSelectedSecurityQuestionsMongodbErrorResponse = new ErrorResponse('500', 'Internal server error', err);
+        const findSelectedSecurityQuestionsMongodbErrorResponse = new ErrorResponse(
+          "500",
+          "Internal server error",
+          err
+        );
         res.status(500).send(findSelectedSecurityQuestionsMongodbErrorResponse.toObject());
-
-      }
-      else{
+      } else {
         console.log(user);
-        const findSelectedSecurityQuestionsResponse = new BaseResponse('200', 'Internal server error', user.selectedSecurityQuestions);
+        const findSelectedSecurityQuestionsResponse = new BaseResponse(
+          "200",
+          "Internal server error",
+          user.selectedSecurityQuestions
+        );
         res.json(findSelectedSecurityQuestionsResponse.toObject());
       }
-    })
-  }
-  catch (e)
-  {
+    });
+  } catch (e) {
     console.log(e);
-    const findSelectedSecurityQuestionsCatchErrorResponse = new ErrorResponse('500', 'Internal server error', e);
+    const findSelectedSecurityQuestionsCatchErrorResponse = new ErrorResponse("500", "Internal server error", e);
     res.status(500).send(findSelectedSecurityQuestionsCatchErrorResponse.toObject());
   }
 });
