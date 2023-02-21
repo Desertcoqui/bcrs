@@ -38,18 +38,22 @@ const router = express.Router();
  */
 router.get("/:id", async (req, res) => {
   try {
+    //find security question by ID
     SecurityQuestion.findOne({ _id: req.params.id }, function (err, securityQuestion) {
       if (err) {
+        //catch internal server error 500
         console.log(err);
         const findByIdMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
         res.status(500).send(findByIdMongodbErrorResponse.toObject());
       } else {
+        //disppay correct security question if info correct
         console.log(securityQuestion);
         const findByIdResponse = new BaseResponse(200, "Query successful", securityQuestion);
         res.json(findByIdResponse.toObject());
       }
     });
   } catch (e) {
+    //display internal server error
     console.log(e);
     const findByIdCatchErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
     res.status(500).send(findByIdCatchErrorResponse.toObject());

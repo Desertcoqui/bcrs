@@ -12,7 +12,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
 import {SessionService} from "../../services/session.service";
-//import {NgModule} from '@angular/core';
 
 @Component({
   selector: 'app-reset-password-form',
@@ -24,6 +23,7 @@ export class ResetPasswordFormComponent implements OnInit {
   isAuthenticated: string;
   username: string;
 
+  //this set the criterial for passwords
   form: FormGroup = this.fb.group({
     password: [null, Validators.compose([Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=. *\\d)[A-Za-z\\d]{8,}$')])]
   })
@@ -38,7 +38,9 @@ export class ResetPasswordFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
+  /**
+   * this code take the a user's password input and update it.
+   */
   updatePassword(){
     const password = this.form.controls['password'].value;
     this.sessionService.updatePassword(password, this.username).subscribe({

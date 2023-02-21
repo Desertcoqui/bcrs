@@ -137,15 +137,18 @@ router.get("/verify/users/:userName", async (req, res) => {
   try {
     User.findOne({ userName: req.params.userName }, function (err, user) {
       if (err) {
+        //catch internal errors 500
         console.log(err);
         const verifyUserMongodbErrorResponse = new ErrorResponse("500", "Internal server error", err);
         res.status(500).send(verifyUserMongodbErrorResponse.toObject());
       } else {
         if (user) {
+          //populate verified user if everything is corrected
           console.log(user);
           const verifyUserResponse = new BaseResponse("200", "Query successful", user);
           res.json(verifyUserResponse.toObject());
         } else {
+          //populate invalid user if info not correct
           const invalidUsernameResponse = new BaseResponse("400", "Invalid username", req.params.userName);
           res.status(400).send(invalidUsernameResponse.toObject());
         }
