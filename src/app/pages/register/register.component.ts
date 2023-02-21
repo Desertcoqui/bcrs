@@ -66,8 +66,6 @@ export class RegisterComponent implements OnInit {
 
     this.securityQuestionService.findAllSecurityQuestions().subscribe({
       next: (res) => {
-        console.log("Data check");
-        console.log(res);
         this.securityQuestions = res.data;
         console.log(this.securityQuestions);
       },
