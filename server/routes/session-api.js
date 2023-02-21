@@ -240,11 +240,23 @@ router.post("/users/:username/reset-password", async (req, res) => {
  *             required:
  *               - userName
  *               - password
+ *               - firstName
+ *               - lastName
+ *               - phoneNumber
+ *               - address
+ *               - email
+ *               - role
+ *               - selectedSecurityQuestions:
+ *                  type: array
+ *                  items:
+ *                    type: object        
  *             properties:
  *              userName:
  *                type: string
  *              password:
  *                type: string
+ *              
+ *   
  *     responses:
  *       '200':
  *         description: Login successful
