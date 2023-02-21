@@ -93,11 +93,11 @@ export class RegisterComponent implements OnInit {
         this.user = {
             userName: credentials.userName,
             password: credentials.password,
-            firstName: credentials.firstName,
-            lastName: credentials.lastName,
-            phoneNumber: credentials.phoneNumber,
-            address: credentials.address,
-            email: credentials.email,
+            firstName: contactInformation.firstName,
+            lastName: contactInformation.lastName,
+            phoneNumber: contactInformation.phoneNumber,
+            address: contactInformation.address,
+            email: contactInformation.email,
             selectedSecurityQuestions: this.selectedSecurityQuestions
         }
         console.log(this.user);
