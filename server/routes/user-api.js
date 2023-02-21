@@ -330,7 +330,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 /**
- * FindSelectedSecurityQuestions
+ * findSelectedSecurityQuestions
  * @openapi
  * /api/users/{userName}/security-questions:
  *  get:
