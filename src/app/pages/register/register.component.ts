@@ -1,3 +1,11 @@
+/**
+ * Bob's Computer Repair Shop
+ * Author: Professor Krasso
+ * Modified: Kailee Stephens
+ * Date : 02/20/2023
+ * Description: ts code for login page
+ */
+
 import { Component, OnInit } from "@angular/core";
 import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
 import { SecurityQuestion } from "../../shared/models/security-question.interface";
