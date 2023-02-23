@@ -1,8 +1,8 @@
 /**
  * user.js
  * Author: Professor Krasso
- * Modified: Manel Phiseme
- * Date : 02/12/2023
+ * Modified: Manel Phiseme, Ferdinand Detres Jr
+ * Date : 02/23/2023
  * Description: user model /schema
  */
 
