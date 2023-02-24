@@ -8,7 +8,7 @@
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-//title and price imported from line-item schema
+//title and price imported from line-item schem
 const lineItemDocument = require("../schemas/line-item");
 
 const invoiceSchema = new Schema(
