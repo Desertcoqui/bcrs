@@ -60,6 +60,7 @@ import { VerifySecurityQuestionsComponent } from "./shared/forms/verify-security
 import { AboutComponent } from "./pages/about/about.component";
 import { RegisterComponent } from "./pages/register/register.component";
 import { VerifyUsernameFormComponent } from "./shared/forms/verify-username-form/verify-username-form.component";
+import { RoleDetailsComponent } from './pages/role-details/role-details.component';
 
 @NgModule({
   imports: [
@@ -116,6 +117,7 @@ import { VerifyUsernameFormComponent } from "./shared/forms/verify-username-form
     VerifySecurityQuestionsComponent,
     VerifyUsernameFormComponent,
     RegisterComponent,
+    RoleDetailsComponent,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],
