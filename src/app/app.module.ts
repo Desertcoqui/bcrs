@@ -63,6 +63,8 @@ import { VerifyUsernameFormComponent } from "./shared/forms/verify-username-form
 import { RoleDetailsComponent } from './pages/role-details/role-details.component';
 import { RoleListComponent } from './pages/role-list/role-list.component';
 
+import { InvoiceSummaryDialogComponent } from "./shared/invoice-summary-dialog/invoice-summary-dialog/invoice-summary-dialog.component";
+
 @NgModule({
   imports: [
     AppRoutingModule,
@@ -96,6 +98,7 @@ import { RoleListComponent } from './pages/role-list/role-list.component';
     MessagesModule,
     ReactiveFormsModule,
     TableModule,
+    InvoiceSummaryDialogComponent,
   
   ],
   declarations: [
