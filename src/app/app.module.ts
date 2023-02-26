@@ -98,8 +98,7 @@ import { InvoiceSummaryDialogComponent } from "./shared/invoice-summary-dialog/i
     MessagesModule,
     ReactiveFormsModule,
     TableModule,
-    InvoiceSummaryDialogComponent,
-  
+        
   ],
   declarations: [
     AppComponent,
@@ -123,6 +122,8 @@ import { InvoiceSummaryDialogComponent } from "./shared/invoice-summary-dialog/i
     RegisterComponent,
     RoleDetailsComponent,
     RoleListComponent,
+    InvoiceSummaryDialogComponent,
+    
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],

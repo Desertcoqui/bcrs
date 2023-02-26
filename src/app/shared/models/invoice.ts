@@ -32,6 +32,9 @@ export class Invoice {
     setLineItems(lineItems: LineItem[]): void{
         this.lineItems = lineItems;
     }
+    getLineItems(): LineItem[] {
+        return this.lineItems;
+    }
     
     getLineItemTotal(): number {
         let total: number = 0;

@@ -10,6 +10,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Invoice } from '../../models/invoice';
 
+
 @Component({
   selector: 'app-invoice-summary-dialog',
   templateUrl: './invoice-summary-dialog.component.html',
