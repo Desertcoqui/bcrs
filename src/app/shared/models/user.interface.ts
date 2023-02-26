@@ -7,7 +7,7 @@
 // In-Class tutorials
 
 import { SelectedSecurityQuestion } from "./selected-security-question.interface";
-
+import { Role } from "./role.interface";
 
 export interface User {
   _id?: string;
@@ -19,4 +19,5 @@ export interface User {
   address: string;
   email: string; 
   selectedSecurityQuestions?: SelectedSecurityQuestion[]; 
+  role?: Role;
 }

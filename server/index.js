@@ -33,7 +33,7 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "WEB 450 RESTful APIs",
+      title: "BCRS RESTful APIs",
       version: "1.0.0",
     },
   },

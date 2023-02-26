@@ -102,6 +102,9 @@ router.get("/:roleId", async (req, res) => {
   }
 });
 /**
+ * CreateRole
+ */
+/**
  * createRole
  * @openapi
  * /api/roles:

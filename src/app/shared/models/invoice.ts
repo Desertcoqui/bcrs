@@ -52,7 +52,13 @@ export class Invoice {
 
     //May not be correct (will come back to)
     getTotal(): number {
-        return this.getLineItemTotal()
+        return Number(this.partsAmount) + Number(this.getLaborAmount()) + Number(this.getLineItemTotal());
+    }
+
+    clear(){
+        this.partsAmount = 0;
+        this.laborHours = 0;
+        this.lineItems = [];
     }
 
 }
