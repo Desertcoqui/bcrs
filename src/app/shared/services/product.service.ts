@@ -51,7 +51,7 @@ export class ProductService {
                 id: 105,
                 title: 'Keyboard Cleaning',
                 price: 45.00,
-                checking: false
+                checked: false
             },
             {
                 id: 106,
