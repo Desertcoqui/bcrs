@@ -61,7 +61,7 @@ import { AboutComponent } from "./pages/about/about.component";
 import { RegisterComponent } from "./pages/register/register.component";
 import { VerifyUsernameFormComponent } from "./shared/forms/verify-username-form/verify-username-form.component";
 import { RoleDetailsComponent } from './pages/role-details/role-details.component';
-import { RoleListComponent } from './pages/role-list/role-list.component';
+import { RoleListComponent } from "./pages/role-list/role-list.component";
 
 @NgModule({
   imports: [

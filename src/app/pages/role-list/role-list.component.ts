@@ -1,5 +1,5 @@
 import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
-import {Role} from "../../shared/models/role.interface";
+import { Role } from 'src/app/shared/models/role.interface';
 import { Message } from 'primeng/api';
 import { RoleService } from 'src/app/shared/services/role.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

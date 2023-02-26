@@ -7,11 +7,11 @@
 */
 
 import { Component, OnInit } from '@angular/core';
-import {Role} from "../../shared/models/role.interface";
 import { Message } from 'primeng/api';
 import { RoleService } from 'src/app/shared/services/role.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Role } from 'src/app/shared/models/role.interface';
 
 @Component({
   selector: 'app-role-details',
