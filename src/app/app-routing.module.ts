@@ -16,7 +16,7 @@ import { SecurityQuestionListComponent } from "./pages/security-question-list/se
 import { UserCreateComponent } from "./pages/user-create/user-create.component";
 import { UserDetailsComponent } from "./pages/user-details/user-details.component";
 import { UserListComponent } from "./pages/user-list/user-list.component";
-import { AuthGuard } from "./auth.guard";
+import { AuthGuard } from "./shared/auth.guard";
 import { LoginComponent } from "./pages/login/login.component";
 import { AboutComponent } from "./pages/about/about.component";
 import { ContactUsComponent } from "./pages/contact-us/contact-us.component";

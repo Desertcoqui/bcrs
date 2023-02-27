@@ -6,51 +6,88 @@
  Attributions: class lecture
 -->
 
-<div fxLayout="column"  fxLayoutAlign="center center" class="services-list">
-  <h1 class="title">Service Repair Form</h1>
+<div fxLayout="column" class="main-welcome">
+  <h1 class="title">
+    Welcome to WEB 450's - Bob's Computer Repair Shop<br />
+    <span class="subtitle">
+      Service Repair Form
+    </span>
+  </h1>
 
+  <div fxFlex>
+      <mat-card class="mat-elevation-z0" style="width: 65%; margin: 0 auto">
+      
+      <!--products form-->
+        <form #invoiceForm="ngForm" (submit)="generateInvoice();">
+          <mat-card-content>
 
-  <mat-card class="mat-elevation-z0 service-card">
-    <form #serviceRepairForm="ngForm" (ngSubmit)="submit(serviceRepairForm.value); serviceRepairForm.reset();">
+            <!--fx layout container-->
+            <div fxLayout="column" fxLayoutGap="5px">
 
-    <mat-card class="mat-elevation-z0" fxLayoutAlign='center center' fxLayout='row'>
+              <!--Service check boxes-->
+              <div fxFlex>
+                
+                <mat-card class="mat-elevation-z0">
+                  <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+                  <p-messages [(value)]="successMessages" [enableService]="false"></p-messages>
 
-      <!-- service repair -->
-      <div fxLayout="column" style="margin-right: 10%;">
-        <h3 fxFlex>Services</h3>
-        <div ngModelGroup="checkGroup" *ngFor="let service of services">
-          <mat-checkbox name="{{service.id}}" ngModel>
-            {{service.title}} ({{service.price | currency}})
-          </mat-checkbox>
-          <br/>
-        </div>
-      </div>
+                  <mat-card-subtitle>Services</mat-card-subtitle>
 
-      <!-- parts & labor section -->
-      <div fxLayout="column">
-        <h3 fxFlex>Standard Fees</h3>
-        <mat-form-field fxFlex style="width: 300px !important;">
-          <input matInput name="parts"
-                 ngModel="0" placeholder="Parts"/>
-        </mat-form-field>
+                  <mat-card-content>
+                    <div *ngFor="let product of products">
+                      <mat-checkbox value="{{ product.price}}" [(ngModel)]="product.checked" [name]="product.title">
+                        {{ product.title }} ({{product.price | currency }})
+                      </mat-checkbox>
+                    </div>
 
-        <mat-form-field fxFlex style="width: 300px !important;">
-          <input matInput name="labor"
-                 ngModel="0" placeholder="Labor @ 50.00/hr"/>
-        </mat-form-field>
-      </div>
-    </mat-card>
+                  </mat-card-content>
+                </mat-card>
 
-    <br>
-    <!-- form actions -->
-<div fxLayoutAlign='center center'>
-      <mat-card-actions align="end"  style="margin-left: 10%;">
-      <button mat-raised-button type="reset" color="primary" routerLink="/">Cancel</button>
-      <button mat-raised-button type="submit" color="accent">Submit</button>
-    </mat-card-actions>
-</div>
+                <br />
+                <mat-divider></mat-divider>
+                <br />
+              </div>
+              <!-- end services -->
 
+              <!--Standard Fees-->
+              <div fxFlex>
+                <mat-card class="mat-elevation-z0">
 
-  </form>
-</mat-card>
-</div>
+                  <mat-card-subtitle>Standard Fees</mat-card-subtitle>
+                  <mat-card-content>
+                    <div fxLayout="column">
+                      <mat-form-field class="w-50" appearance="fill" fxFlex>
+                        <mat-label>Parts</mat-label>
+                        <input matInput [(ngModel)]="invoice.partsAmount" type="number" name="txtPartsAmount" />
+                      </mat-form-field>
+
+                      <mat-form-field class="w-50" appearance="fill" fxFlex>
+                        <mat-label>Labor @ 50/hr</mat-label>
+                        <input matInput [(ngModel)]="invoice.laborHours" type="number" name="txtLaborHours" />
+                      </mat-form-field>
+
+                    </div>
+                  </mat-card-content>
+
+                </mat-card>
+              </div>
+              <!--end standard fees section-->
+            </div>
+            <!--end fx column container-->
+          </mat-card-content>
+          <!--end mat-card-content-->
+
+          <br />
+          <mat-divider></mat-divider>
+          <br />
+
+          <!-- form submission buttons-->
+          <mat-card-actions align="end">
+            <button mat-raised-button type="reset" color="warn">Cancel</button>
+            <button mat-raised-button color="accent">Generate Invoice</button>
+          </mat-card-actions>
+          <!--end form submission buttons-->
+        </form>
+      </mat-card>
+  </div>
+</div>    
