@@ -34,7 +34,7 @@ const routes: Routes = [
     component: BaseLayoutComponent,
     children: [
       {
-        path: "/",
+        path: "",
         component: HomeComponent,
       },
       {
