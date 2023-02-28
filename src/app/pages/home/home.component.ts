@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
     this.invoice = new Invoice(this.username);
 
     console.log(this.products);
-   }
+  }
 
   ngOnInit(): void {
   }
