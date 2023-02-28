@@ -7,8 +7,8 @@
 // In-Class tutorials */
 
 import { Component, OnInit } from "@angular/core";
-import { Route, Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
+import { Route, Router } from "@angular/router";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: "app-base-layout",
@@ -17,13 +17,16 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class BaseLayoutComponent implements OnInit {
   year: number = Date.now();
+  userName: string;
 
-  constructor(private cookieService: CookieService, private router: Router) {}
+  constructor(private cookieService: CookieService, private router: Router) {
+    this.userName = this.cookieService.get("sessionuser") ?? "";
+  }
 
   ngOnInit(): void {}
 
   logout() {
     this.cookieService.deleteAll();
-    this.router.navigate(['/session/login']);
+    this.router.navigate(["/session/login"]);
   }
 }
