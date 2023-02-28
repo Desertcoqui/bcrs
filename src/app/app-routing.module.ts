@@ -28,13 +28,14 @@ import { RegisterComponent } from "./pages/register/register.component";
 import { VerifyUsernameFormComponent } from "./shared/forms/verify-username-form/verify-username-form.component";
 import { RoleDetailsComponent } from "./pages/role-details/role-details.component";
 import { RoleListComponent } from "./pages/role-list/role-list.component";
+import { PurchasesByServiceGraphComponent } from "./pages/purchases-by-service-graph/purchases-by-service-graph/purchases-by-service-graph.component";
 const routes: Routes = [
   {
     path: "",
     component: BaseLayoutComponent,
     children: [
       {
-        path: "",
+        path: "/",
         component: HomeComponent,
       },
       {
@@ -65,6 +66,18 @@ const routes: Routes = [
       {
         path: "security-questions/:questionId",
         component: SecurityQuestionDetailsComponent,
+      },
+      {
+        path: "roles/:roleId",
+        component: RoleDetailsComponent,
+      },
+      {
+        path: "roles",
+        component: RoleListComponent,
+      },
+      {
+        path: "purchases-by-service-graph",
+        component: PurchasesByServiceGraphComponent,
       },
     ],
     canActivate: [AuthGuard],
@@ -100,14 +113,6 @@ const routes: Routes = [
       {
         path: "505",
         component: ErrorComponent,
-      },
-      {
-        path: "roles/:roleId",
-        component: RoleDetailsComponent,
-      },
-      {
-        path: "roles",
-        component: RoleListComponent,
       },
     ],
   },
