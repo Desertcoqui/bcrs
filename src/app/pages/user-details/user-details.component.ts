@@ -11,8 +11,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { User } from "../../shared/models/user.interface";
 import { UserService } from "../../shared/services/user.service";
 import { Message } from "primeng/api";
-import {Role} from "../../shared/models/role.interface";
-import {RoleService} from "../../shared/services/role.service";
+import { Role } from "../../shared/models/role.interface";
+import { RoleService } from "../../shared/services/role.service";
 
 @Component({
   selector: "app-user-details",
@@ -31,7 +31,7 @@ export class UserDetailsComponent implements OnInit {
     phoneNumber: [null, Validators.compose([Validators.required])],
     email: [null, Validators.compose([Validators.required, Validators.email])],
     address: [null, Validators.compose([Validators.required])],
-    role: [null, Validators.compose([Validators.required])]
+    role: [null, Validators.compose([Validators.required])],
   });
 
   constructor(
@@ -49,8 +49,8 @@ export class UserDetailsComponent implements OnInit {
     this.userService.findUserById(this.userId).subscribe({
       next: (res) => {
         this.user = res.data;
-        console.log('user object from findUserById call')
-        console.log(this.user)
+        console.log("user object from findUserById call");
+        console.log(this.user);
       },
       error: (e) => {
         console.log(e);
@@ -61,7 +61,7 @@ export class UserDetailsComponent implements OnInit {
         this.form.controls["phoneNumber"].setValue(this.user.phoneNumber);
         this.form.controls["email"].setValue(this.user.email);
         this.form.controls["address"].setValue(this.user.address);
-        this.form.controls['role'].setValue(this.user.role?.text ?? 'standard');
+        this.form.controls["role"].setValue(this.user.role?.text ?? "standard");
 
         console.log(this.user);
 
@@ -69,10 +69,10 @@ export class UserDetailsComponent implements OnInit {
           next: (res) => {
             this.roles = res.data;
           },
-          error: (e) =>{
-            console.log(e)
-          }
-        })
+          error: (e) => {
+            console.log(e);
+          },
+        });
       },
     });
   }
@@ -87,8 +87,8 @@ export class UserDetailsComponent implements OnInit {
       email: this.form.controls["email"].value,
       address: this.form.controls["address"].value,
       role: {
-        text: this.form.controls['role'].value
-      }
+        text: this.form.controls["role"].value,
+      },
     };
 
     this.userService.updateUser(this.userId, updatedUser).subscribe({
