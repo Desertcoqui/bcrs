@@ -23,31 +23,62 @@ const saltRounds = 10; // default salt rounds for hashing algorithm
  * createUser
  * @openapi
  * /api/users:
- *   post:
- *     tags:
- *       - Users
- *     description: API to create new user objects
- *     summary: Creates a new user object
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             required:
- *               - userName
- *               - password
- *             properties:
+ *  post:
+ *    tags:
+ *      - Users
+ *    description: Creates new user
+ *    summary: Creates new user
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            required:
+ *              - userName
+ *              - password
+ *              - firstName
+ *              - lastName
+ *              - phoneNumber
+ *              - emailAddress
+ *              - address
+ *              - securityQuestions
+ *            properties:
  *              userName:
  *                type: string
  *              password:
  *                type: string
- *     responses:
- *       '200':
- *         description: Query successful
- *       '500':
- *         description: Internal server error
- *       '501':
- *         description: MongoDB Exception
+ *              firstName:
+ *                type: string
+ *              lastName:
+ *                type: string
+ *              phoneNumber:
+ *                type: number
+ *              emailAddress:
+ *                type: string
+ *              address:
+ *                type: string
+ *              role:
+ *                type: object
+ *                properties:
+ *                  text:
+ *                    type: string
+ *                    default: "standard"
+ *              selectedSecurityQuestions:
+ *                type: array
+ *                items:
+ *                  type: object
+ *                  properties:
+ *                    questionText:
+ *                      type: string
+ *                    answerText:
+ *                      type: string
+ *    responses:
+ *      '200':
+ *        description: User document
+ *      '500':
+ *        description: Server Exception
+ *      '501':
+ *        description: MongoDB Exception
+ *
  */
 router.post("/", async (req, res) => {
   try {
@@ -65,24 +96,23 @@ router.post("/", async (req, res) => {
       phoneNumber: req.body.phoneNumber,
       address: req.body.address,
       email: req.body.email,
-      role: standardRole,
+      role: req.body.role,
+      selectedSecurityQuestions: req.body.selectedSecurityQuestions,
     };
 
     User.create(newUser, function (err, user) {
       if (err) {
-        console.log(err);
-        const createUserMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
-        res.status(500).send(createUserMongodbErrorResponse.toObject());
+        res.status(501).send({
+          message: `MongoDB Exception: ${err}`,
+        });
       } else {
-        console.log(user);
-        const createUserResponse = new BaseResponse(200, "Query successful", user);
-        res.json(createUserResponse.toObject());
+        res.json(user);
       }
     });
-  } catch (e) {
-    console.log(e);
-    const createUserCatchErrorResponse = new ErrorResponse(500, "Internal server error", e.message);
-    res.status(500).send(createUserCatchErrorResponse.toObject());
+  } catch (error) {
+    res.status(500).send({
+      err: "Internal Server Error: " + error.message,
+    });
   }
 });
 

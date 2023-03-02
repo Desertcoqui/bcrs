@@ -9,7 +9,6 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "../../shared/models/user.interface";
 import { UserService } from "../../shared/services/user.service";
-import { HttpClient } from "@angular/common/http";
 import { ConfirmationService, ConfirmEventType } from "primeng/api";
 
 @Component({
