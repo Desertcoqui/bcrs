@@ -23,6 +23,7 @@ const app = express(); // Express variable.
 const UserApi = require("./routes/user-api");
 const SessionApi = require("./routes/session-api");
 const SecurityQuestionApi = require("./routes/security-question-api");
+const RolesApi = require("./routes/role-api");
 
 // default server port value.
 const PORT = process.env.PORT || 3000;
@@ -54,6 +55,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.use("/api/users", UserApi);
 app.use("/api/session", SessionApi);
 app.use("/api/security-questions", SecurityQuestionApi);
+app.use("/api/roles", RolesApi);
 
 /**
  * Database connection.

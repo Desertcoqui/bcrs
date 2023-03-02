@@ -10,9 +10,8 @@
 const express = require("express");
 const Role = require("../models/role");
 const User = require("../models/user");
-const ErrorResponse = require("../models/error-response");
-const BaseResponse = require("../models/base-response");
-
+const BaseResponse = require("../services/base-response");
+const ErrorResponse = require("../services/error-response");
 const router = express.Router();
 //Make sure YAML does not have spaces between the code otherwise the API Swagger wont populate
 
@@ -136,8 +135,8 @@ router.post("/", async (req, res) => {
     Role.findOne({ text: req.body.text }, function (err, role) {
       if (err) {
         console.log(err);
-        const findRoleMongodbErrorResponse = new ErrorResponse(500, "Internal server error", err);
-        res.status(500).send(findRoleMongodbErrorResponse.toObject());
+        const findRoleMongodbError = new ErrorResponse(500, "Internal server error", err);
+        res.status(500).send(findRoleMongodbError.toObject());
       } else {
         console.log(role);
 
