@@ -5,7 +5,6 @@
 // Modified By: Kailee Stephens
 // Attributions: In-Class tutorials
 -->
-
 <div fxLayout="column">
     <mat-card class="mat-elevation-z0">
         <mat-card-title style="text-align: center; font-weight: lighter;">Update User Form</mat-card-title>
@@ -79,8 +78,8 @@
                     <mat-form-field appearance="fill">
                         <mat-label>Address</mat-label>
 
-                        <text-area matInput required formControlName="address"
-                            placeholder="505 main street Omaha, Nebraska 68111"></text-area>
+                        <textarea matInput required formControlName="address"
+                            placeholder="505 main street Omaha, Nebraska 68111"></textarea>
 
                         <mat-error class="error"
                             *ngIf="form.controls['address'].hasError('required') && form.controls['address'].touched">
