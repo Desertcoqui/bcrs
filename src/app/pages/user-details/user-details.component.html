@@ -6,66 +6,66 @@
 // Attributions: In-Class tutorials
 -->
 
-<div fxLayout="column">
-    <mat-card class="mat-elevation-z0">
-        <mat-card-title style="text-align: center; font-weight: lighter;">Update User Form</mat-card-title>
-        <mat-card-subtitle style="text-align: center; font-weight: lighter;">
-            Fields marked with an asterisk (*) are required.
-        </mat-card-subtitle>
-        <br />
+<!-- <div fxLayout="column"> -->
+<!-- <mat-card class="mat-elevation-z0"> -->
+<mat-card-title style="text-align: center; font-weight: lighter;">Update User Form</mat-card-title>
+<mat-card-subtitle style="text-align: center; font-weight: lighter;">
+    Fields marked with an asterisk (*) are required.
+</mat-card-subtitle>
+<br />
 
-        <p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
+<p-messages [(value)]="errorMessages" [enableService]="false"></p-messages>
 
-        <form [formGroup]="form" (ngSubmit)="saveUser()" (keydown.enter)="$event.preventDefault()"
-            style="width: 50%; margin: 0 auto;">
-            <mat-card-content>
-                <div fxLayout="column" fxLayoutGap="10px">
-                    <mat-form-field appearance="fill" class="w-100">
-                        <mat-label>First Name</mat-label>
-                        <input type="text" matInput formControlName="firstName" required />
+<form [formGroup]="form" (ngSubmit)="saveUser()" (keydown.enter)="$event.preventDefault()"
+    style="width: 50%; margin: 0 auto;" class="w-100">
+    <!-- <mat-card-content> -->
+    <!-- <div fxLayout="column" fxLayoutGap="10px"> -->
+    <div>
+        <mat-label>First Name</mat-label>
+        <input type="text" matInput formControlName="firstName" required />
 
-                        <mat-error class="error"
+        <!-- <mat-error class="error"
                             *ngIf="form.controls['firstName'].hasError('required') && form.controls['firstName'].touched">
                             First name is a required field
-                        </mat-error>
-                    </mat-form-field>
+                        </mat-error> -->
+    </div>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Last Name</mat-label>
-                        <input type="text" matInput formControlName="lastName" required />
+    <div>
+        <mat-label>Last Name</mat-label>
+        <input type="text" matInput formControlName="lastName" required />
 
-                        <mat-error class="error"
+        <!-- <mat-error class="error"
                             *ngIf="form.controls['lastName'].hasError('required') && form.controls['lastName'].touched">
                             Last name is a required field.
-                        </mat-error>
-                    </mat-form-field>
+                        </mat-error> -->
+    </div>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Role</mat-label>
-                        <mat-select formControlName="role">
-                            <mat-option *ngFor="let role of roles" [value]="role.text">{{role.text}}</mat-option>
-                        </mat-select>
-                        <mat-error class="error"
+    <div>
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+            <mat-option *ngFor="let role of roles" [value]="role.text">{{role.text}}</mat-option>
+        </mat-select>
+        <!-- <mat-error class="error"
                             *ngIf="form.controls['role'].hasError('required') && form.controls['role'].touched">
                             Role is a required field.
-                        </mat-error>
-                    </mat-form-field>
+                        </mat-error> -->
+    </div>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Phone Number</mat-label>
-                        <input type="text" matInput formControlName="phoneNumber" required />
+    <div>
+        <mat-label>Phone Number</mat-label>
+        <input type="text" matInput formControlName="phoneNumber" required />
 
-                        <mat-error class="error"
-                            *ngIf="form.controls['lastName'].hasError('required') && form.controls['lastName'].touched">
+        <!-- <mat-error class="error"
+                            *ngIf="form.controls['phoneNumber'].hasError('required') && form.controls['phoneNumber'].touched">
                             Phone number is a required field.
-                        </mat-error>
-                    </mat-form-field>
+                        </mat-error> -->
+    </div>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Email Address</mat-label>
-                        <input type="text" matInput fromControlName required />
+    <div>
+        <mat-label>Email Address</mat-label>
+        <input type="text" matInput formControlName="email" required />
 
-                        <mat-error class="error"
+        <!-- <mat-error class="error"
                             *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched">
                             Email is a required field.
                         </mat-error>
@@ -73,29 +73,29 @@
                         <mat-error class="error"
                             *ngIf="form.controls['email'].hasError('email') && form.controls['email'].touched">
                             Invalid email format.
-                        </mat-error>
-                    </mat-form-field>
+                        </mat-error> -->
+    </div>
 
-                    <mat-form-field appearance="fill">
-                        <mat-label>Address</mat-label>
+    <div>
+        <mat-label>Address</mat-label>
+        <input type="text" matInput formControlName="address" required />
 
-                        <text-area matInput required formControlName="address"
-                            placeholder="505 main street Omaha, Nebraska 68111"></text-area>
 
-                        <mat-error class="error"
+
+        <!-- <mat-error class="error"
                             *ngIf="form.controls['address'].hasError('required') && form.controls['address'].touched">
                             Address is a required field.
-                        </mat-error>
-                    </mat-form-field>
+                        </mat-error> -->
+    </div>
 
-                </div>
-            </mat-card-content>
+    <!-- </div> -->
+    <!-- </mat-card-content> -->
 
-            <br />
-            <mat-card-actions>
-                <button mat-raised-button (click)="cancel()" color="accent"> Cancel </button>
-                <button mat-raised-button [disabled]="!form.valid" color="primary">Submit</button>
-            </mat-card-actions>
-        </form>
-    </mat-card>
-</div>
+    <br />
+    <mat-card-actions>
+        <button mat-raised-button (click)="cancel()" color="accent"> Cancel </button>
+        <button mat-raised-button [disabled]="!form.valid" color="primary">Submit</button>
+    </mat-card-actions>
+</form>
+<!-- </mat-card> -->
+<!-- </div> -->
