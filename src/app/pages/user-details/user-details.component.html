@@ -20,7 +20,7 @@
             style="width: 50%; margin: 0 auto;">
             <mat-card-content>
                 <div fxLayout="column" fxLayoutGap="10px">
-                    <mat-form-field appearance="fill">
+                    <mat-form-field appearance="fill" class="w-100">
                         <mat-label>First Name</mat-label>
                         <input type="text" matInput formControlName="firstName" required />
 
@@ -39,6 +39,7 @@
                             Last name is a required field.
                         </mat-error>
                     </mat-form-field>
+
                     <mat-form-field appearance="fill">
                         <mat-label>Role</mat-label>
                         <mat-select formControlName="role">
