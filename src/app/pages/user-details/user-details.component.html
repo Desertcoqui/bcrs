@@ -55,14 +55,14 @@
                         <input type="text" matInput formControlName="phoneNumber" required />
 
                         <mat-error class="error"
-                            *ngIf="form.controls['lastName'].hasError('required') && form.controls['lastName'].touched">
+                            *ngIf="form.controls['phoneNumber'].hasError('required') && form.controls['phoneNumber'].touched">
                             Phone number is a required field.
                         </mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
                         <mat-label>Email Address</mat-label>
-                        <input type="text" matInput fromControlName required />
+                        <input type="text" matInput formControlName="email" required />
 
                         <mat-error class="error"
                             *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched">
@@ -77,9 +77,7 @@
 
                     <mat-form-field appearance="fill">
                         <mat-label>Address</mat-label>
-
-                        <textarea matInput required formControlName="address"
-                            placeholder="505 main street Omaha, Nebraska 68111"></textarea>
+                        <input type="text" matInput formControlName="address" required />
 
                         <mat-error class="error"
                             *ngIf="form.controls['address'].hasError('required') && form.controls['address'].touched">
