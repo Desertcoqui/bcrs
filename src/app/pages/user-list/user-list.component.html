@@ -33,6 +33,8 @@
                         <th>Phone Number</th>
                         <th>Email</th>
                         <th>Address</th>
+                        <th>Roles</th>
+
                         <th style="width: 8rem;"></th>
                     </tr>
                 </ng-template>
@@ -46,6 +48,8 @@
                         <td>{{user.email}}</td>
 
                         <td>{{user.address}}</td>
+                        <td>{{user.role}}</td>
+
 
                         <td style="text-align:center">
                             <button pButton pRipple type="button" routerLink="/users/{{user._id}}" icon="pi pi-pencil"
