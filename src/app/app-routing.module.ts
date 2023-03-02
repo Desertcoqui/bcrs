@@ -55,7 +55,7 @@ const routes: Routes = [
         component: UserCreateComponent,
       },
       {
-        path: "users/:userId",
+        path: "users/:id",
         component: UserDetailsComponent,
       },
 
