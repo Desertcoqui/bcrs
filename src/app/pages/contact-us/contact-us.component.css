@@ -5,3 +5,20 @@
 // Attributions: https://www.section.io/engineering-education/nodejs-mongoosejs-mongodb/
 //https://www.youtube.com/watch?v=WDrU305J1yw
 // In-Class tutorials --> */
+
+.contactTitle {
+    font-size: 35px
+}
+
+.addressCard{
+    background: #d9d9d9;
+    width: 80%;
+    height: 100%;
+}
+
+
+.phoneCard{
+    background: #d9d9d9;
+    width: 80%;
+    height: 100%;
+}
