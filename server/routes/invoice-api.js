@@ -9,8 +9,9 @@
 // required statements
 const express = require("express");
 const Invoice = require("../models/invoice");
-const ErrorResponse = require("../models/error-response");
-const BaseResponse = require("../models/base-response");
+const ErrorResponse= require("../services/error-response");
+const BaseResponse = require("../services/base-response")
+
 
 const router = express.Router();
 //makes sure there is no spacing in the YAML code and the typescript or the Swagger API wont populate

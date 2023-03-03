@@ -24,6 +24,7 @@ const UserApi = require("./routes/user-api");
 const SessionApi = require("./routes/session-api");
 const SecurityQuestionApi = require("./routes/security-question-api");
 const RolesApi = require("./routes/role-api");
+const invoiceAPI = require("./routes/invoice-api")
 
 // default server port value.
 const PORT = process.env.PORT || 3000;
@@ -38,7 +39,13 @@ const options = {
       version: "1.0.0",
     },
   },
-  apis: ["./server/routes/*.js"], //files containing annotations for the OpenApi Specification!
+  apis: [
+    "./server/routes/security-questions-api.js",
+    "./server/routes/users-api.js",
+    "./server/routes/session-api.js",
+    "./server/routes/role-api.js",
+    "./server/routes/invoice-api.js",
+  ], //files containing annotations for the OpenApi Specification!
 };
 
 const openapiSpecification = swaggerJsdoc(options);
@@ -56,6 +63,7 @@ app.use("/api/users", UserApi);
 app.use("/api/session", SessionApi);
 app.use("/api/security-questions", SecurityQuestionApi);
 app.use("/api/roles", RolesApi);
+app.use("/api/invoices", invoiceAPI)
 
 /**
  * Database connection.

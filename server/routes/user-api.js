@@ -11,7 +11,7 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const BaseResponse = require("../services/base-response");
 const ErrorResponse = require("../services/error-response");
-const user = require("../models/user");
+
 
 const router = express.Router();
 const saltRounds = 10; // default salt rounds for hashing algorithm
@@ -149,6 +149,7 @@ router.get("/", async (req, res) => {
         } else {
           console.log(users);
           const findAllUsersResponse = new BaseResponse(200, "Query successful", users);
+          console.log(`Nothing is found ${findAllUsersResponse.toObject()}`)
           res.json(findAllUsersResponse.toObject());
         }
       });
