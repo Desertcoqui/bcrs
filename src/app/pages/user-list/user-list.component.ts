@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService, private confirmationService: ConfirmationService) {
     this.userService.findAllUsers().subscribe({
       next: (res) => {
-        this.users = res.date;
+        this.users = res.date;      
       },
       error: (e) => {
         console.log(e);
